@@ -2,14 +2,14 @@
 {
     public class Creature
     {
-        private Weapon weapon;
-        private Armor armor;
-        private int hitpoints;
+        public Weapon Weapon { get; private set; }
+        public Armor Armor { get; private set; }
+        public int Hitpoints { get; private set; }
 
         public Creature()
         {
-            weapon = new Weapon();
-            armor = new Armor();
+            Weapon = new Weapon();
+            Armor = new Armor();
         }
 
         public void Fight()
@@ -25,6 +25,11 @@
         public void TakesDamage()
         {
             // stub
+        }
+        
+        public void RestoreHealth(int amount)
+        {
+            Hitpoints += amount;
         }
     }
 }
