@@ -11,7 +11,15 @@ namespace Adventure_Game_407
             for (int i = 0; i < dungeon.Rows; i++)
             {
                 for (int j = 0; j < dungeon.Cols; j++) {
-                    Console.Write(rooms[i, j]);
+                    Console.Write(rooms[i, j].Type);
+                }
+                Console.WriteLine();
+            }
+            
+            for (int i = 0; i < dungeon.Rows; i++)
+            {
+                for (int j = 0; j < dungeon.Cols; j++) {
+                    Console.Write(rooms[i,j].Loot.Count.ToString());
                 }
                 Console.WriteLine();
             }

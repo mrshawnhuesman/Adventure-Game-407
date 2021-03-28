@@ -3,16 +3,13 @@ using System.Runtime.CompilerServices;
 
 namespace Adventure_Game_407
 {
-    public abstract class Treasure
+    public class Treasure : Item
     {
-        protected String Name { get; set; }
-        protected Creature Owner { get; set; }
+        private int GoldAmount { get; }
 
-        public abstract void Use();
-        
-        public void Drop()
+        public Treasure(int goldAmount)
         {
-            // stub
+            GoldAmount = goldAmount;
         }
     }
 }

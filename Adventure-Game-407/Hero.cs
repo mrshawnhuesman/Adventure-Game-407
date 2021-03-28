@@ -6,31 +6,26 @@ namespace Adventure_Game_407
 {
     public class Hero : Creature
     {
-        private int inventoryCapacity = 10;
-        private List<Treasure> inventory;
+        private int InventoryCapacity = 10;
+        public List<Item> Inventory { get; private set; }
 
         public Hero()
         {
             
         }
 
-        public void Use(Treasure treasure)
+        public void PickUp(Item item)
         {
-            treasure.Use();
-        }
-
-        public void PickUp(Treasure treasure)
-        {
-            if (inventory.Count + 1 <= inventoryCapacity)
+            if (Inventory.Count + 1 <= InventoryCapacity)
             {
-                inventory.Add(treasure);
+                Inventory.Add(item);
+                item.Owner = this;
             }
             else
             {
                 Console.WriteLine("You do not have the capacity to" +
                                   " pickup this item.");
             }
-            inventory.Add(treasure);
         }
         
     }
