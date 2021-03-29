@@ -5,14 +5,28 @@ namespace Adventure_Game_407
 {
     public class Room
     {
-        public List<Item> Loot { get; } = new List<Item>();
+        /*
+         * Room that contains a loot container (array) that contains 0 or more
+         * piece of loot that could be Treasure, Weapon, Armor, Health Potion,
+         * or Magic Dampening Scroll.
+         *
+         * Each room could be only one of the following:
+         * ' ' - empty
+         * 'R' - regular
+         * 'M' - magic dampening
+         * 'E' - entry
+         * 'X' - exit
+         */
+        public List<Item> Loot { get; }
         public char Type { get; }
 
-        private Random _random = new Random();
-        
-        
         public Room(char type)
         {
+            /*
+             * Constructor for room with specified type.
+             * Randomly generates loot
+             */
+            Loot = new List<Item>();
             type = Char.ToUpper(type);
             if (type == 'R' || type == 'M' || type == 'E' || type == 'X' ||
                 type == ' ')

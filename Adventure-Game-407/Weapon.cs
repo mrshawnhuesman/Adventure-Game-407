@@ -7,8 +7,6 @@ namespace Adventure_Game_407
         private int SwingsPerTurn;
         private int Damage;
         private bool IsMagical;
-        
-        private Random _random = new Random();
 
         public Weapon()
         {

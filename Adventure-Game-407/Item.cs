@@ -5,7 +5,6 @@ namespace Adventure_Game_407
     public abstract class Item
     {
         public Creature Owner;
-        public Room RoomOccupied;
 
         public void Description()
         {

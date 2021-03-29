@@ -5,8 +5,6 @@ namespace Adventure_Game_407
     public class HealthPotion : Item
     {    
         public int RestoreAmount { get; private set; }
-        
-        private Random _random = new Random();
 
         public HealthPotion()
         {

@@ -14,7 +14,6 @@ namespace Adventure_Game_407
         public int StartRow { get; }
         public int StartCol { get; }
         
-        private readonly Random _random = new Random();
         private int[] _lastVisited;
 
         public Dungeon()
