@@ -27,6 +27,5 @@ namespace Adventure_Game_407
                                   " pickup this item.");
             }
         }
-        
     }
 }
