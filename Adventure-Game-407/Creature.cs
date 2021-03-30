@@ -22,9 +22,8 @@ namespace Adventure_Game_407
         //A creature will be defeated if the hitpoints dropped to 0
         public void Fight(Creature opponent)
         {
-            int chanceOfHit, index, WeaponDamage, InflictedDamage, TotalDamage = 0;
+            int chanceOfHit, index, WeaponDamage, InflictedDamage, TotalDamage, DamageReduction = 0;
             MagicalMonster currentMagicalMonster = null, opponentMagicalMonster = null;
-            //MagicalSkill opponentDefensiveSkill = null, opponentOfffensiveSkill = null;
      
             if (this is MagicalMonster)                                     //if current creature is a magical monster get the status of their active magic skill
             {
@@ -38,6 +37,7 @@ namespace Adventure_Game_407
 
             while (IsAlive() && opponent.IsAlive())
             {
+                Console.WriteLine(Name + "'s turn.");
                 var attackDamage = 0;
 
                 // current fighter is magic
@@ -55,10 +55,14 @@ namespace Adventure_Game_407
                     else if (generateMove == 2)
                     {
                         attackDamage = currentMagicalMonster.OffensiveSkill.OffensiveDamage;
+                        Console.WriteLine(Name + " used offensive " + currentMagicalMonster.OffensiveSkill.Name
+                        + " for " + attackDamage + " damage");
                     }
                     else
                     {
                         currentMagicalMonster.CurrentMagicDefense = currentMagicalMonster.DefensiveSkill.DefensiveValue;
+                        Console.WriteLine(Name + " used defensive " + currentMagicalMonster.DefensiveSkill.Name
+                        + " for " + currentMagicalMonster.DefensiveSkill.DefensiveValue * 100 + "% defense next round.");
                     }
                 }
                 // current fighter is not magic
@@ -67,7 +71,19 @@ namespace Adventure_Game_407
                     attackDamage = UseWeapon(opponent);
                 }
 
+                if (opponentMagicalMonster != null)
+                {
+                    attackDamage = attackDamage -
+                                      (int) (attackDamage * opponentMagicalMonster.DefensiveSkill.DefensiveValue);
+                }
+                
+                opponent.TakesDamage(attackDamage);
+
                 if (opponent.IsAlive()) opponent.Fight(this);
+                else
+                {
+                    Console.WriteLine(Name + " wins!");
+                }
             }
 
             /*
@@ -140,6 +156,7 @@ namespace Adventure_Game_407
                     weaponDamage = StaticRandom.Instance.Next(1, Weapon.MaxDamage);         //generate weapon damage between 1 and max weapon damage (inclusive)
                 }
             }
+            Console.WriteLine(Name + " is attacking " + opponent.Name + " for " + weaponDamage + " damage.");
             return weaponDamage;
         }
 
