@@ -132,7 +132,7 @@ namespace Adventure_Game_407
         private int UseWeapon(Creature opponent)
         {
             var weaponDamage = 0;
-            for (int i = 0; i < Weapon.NumAttacks(); i++)               //loop from 0 till the the max number of weapon attacks - 1 
+            for (int i = 0; i < Weapon.NumAttacks; i++)               //loop from 0 till the the max number of weapon attacks - 1 
             {
                 var chanceOfHit = StaticRandom.Instance.Next(1, 21);                      //placeholder for random number generator that generates int value between 1 and 21 (inclusive)
                 if (chanceOfHit > opponent.Armor.Strength)                            //if opponent creature armor strength is less than the penetration damage
