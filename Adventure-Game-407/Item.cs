@@ -5,12 +5,10 @@ namespace Adventure_Game_407
     public abstract class Item
     {
         public Creature Owner;
+        public Room RoomOccupied;
+        public string Name { get; private set; }
 
-        public void Description()
-        {
-            Console.WriteLine("This item has no description.");
-        }
-
+  
         public virtual void Use()
         {
             Console.WriteLine("This item is not usable.");
