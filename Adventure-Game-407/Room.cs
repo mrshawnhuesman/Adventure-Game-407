@@ -16,20 +16,41 @@ namespace Adventure_Game_407
          * 'M' - magic dampening
          * 'E' - entry
          * 'X' - exit
+         * 'B' - Boss
          */
         public List<Item> Loot { get; }
-        public char Type { get; }
 
-        public Room(char type)
+        private char _type;
+        public char Type
+        {
+            get { return _type; }
+            set
+            {
+                if (value == 'R' || value == 'M' || value == 'E' || value == 'X' ||
+                    value == ' ' || value == 'B')
+                {
+                    _type = value;
+                }
+            }
+        }
+
+        public int Row { get; }
+        public int Col { get;  }
+        
+        // todo: add monster
+
+        public Room(char type, int row, int col)
         {
             /*
              * Constructor for room with specified type.
              * Randomly generates loot
              */
+            Row = row;
+            Col = col;
             Loot = new List<Item>();
             type = Char.ToUpper(type);
             if (type == 'R' || type == 'M' || type == 'E' || type == 'X' ||
-                type == ' ')
+                type == ' ' || type == 'B')
             {
                 Type = type;
             }
@@ -38,10 +59,7 @@ namespace Adventure_Game_407
                 throw new ArgumentException("Invalid type");
             }
 
-            if (type != ' ')
-            {
-                GenerateLoot();
-            }
+            GenerateLoot();
         }
 
         private void GenerateLoot()
