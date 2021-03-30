@@ -7,7 +7,7 @@ namespace Adventure_Game_407
     public class Hero : Creature
     {
         private readonly int InventoryCapacity = 10;
-        private List<Item> Inventory { get; set; }
+        public List<Item> Inventory { get; set; }
   
         //Hero constructor that takes parameter name, weapon, armor, and hitpoints
         public Hero(string name, Weapon weapon, Armor armor, int hitpoints)
