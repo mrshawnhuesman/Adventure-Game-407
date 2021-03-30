@@ -24,16 +24,16 @@ namespace Adventure_Game_407
             int penetrationDamage, index;
             while (IsAlive() && opponent.IsAlive())                                 //while loop that will run until one of creatures is not alive
             {
-                for (index = 0; index < Weapon.GetNumAttacks(); index++)            //loop from 0 till the the max number of weapon attacks - 1
+                for (index = 0; index < Weapon.NumAttacks(); index++)            //loop from 0 till the the max number of weapon attacks - 1
                 {
                     penetrationDamage = StaticRandom.Instance.Next(1, 21);                      //placeholder for random number generator that generates int value between 1 and 21 (inclusive)
-                    if (damage > enemy.Armor.Strength)                                          //if opponent creature armor strength is less than the penetration number
+                    if (penetrationDamage > opponent.Armor.Strength)                                         //if opponent creature armor strength is less than the penetration damage
                     {
-                        int inflictedDamage = StaticRandom.Instance.Next(1, Weapon.GetMaxDamage);               //generate weapon damage between 1 and max weapon damage (inclusive)
-                        enemy.Hitpoints -= weaponDamage;                                                        //reduce opponent hit points by the amount of the damage inflicted
+                        int inflictedDamage = StaticRandom.Instance.Next(1, Weapon.MaxDamage);               //generate weapon damage between 1 and max weapon damage (inclusive)
+                        opponent.Hitpoints -= inflictedDamage;                                                        //reduce opponent hit points by the amount of the damage inflicted
                         Console.WriteLine(Name + " hit " + opponent.Name + " for: " + inflictedDamage + "!");   //display the current creature name, opponent name, and the amount of damage inflicted
                     }
-                    if (enemy.IsAlive()) enemy.Fight(this);                                                     //if the opponent is still alive, then the opponent will fight back by calling Fight(...) method        
+                    if (opponent.IsAlive()) opponent.Fight(this);                                                     //if the opponent is still alive, then the opponent will fight back by calling Fight(...) method        
                 }
             }
         }
