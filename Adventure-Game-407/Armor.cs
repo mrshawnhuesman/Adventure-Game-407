@@ -2,7 +2,7 @@
 {
     public class Armor : Item
     {
-        public int Strength { get; set; }
+        public int Strength { get; }
 
         public Armor()
         {
@@ -10,18 +10,10 @@
             GenerateName();
         }
 
-        //Armor constructor that only take a parameter int strength with auto generated name
         public Armor(int strength)
         {
             Strength = strength;
             GenerateName();
-        }
-
-        //Armor constructor that takes 2 parameter: int strength and string name
-        public Armor(int strength, string name)
-        {
-            Strength = strength;
-            Name = name;
         }
 
         public void GenerateName()
