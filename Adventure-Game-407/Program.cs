@@ -49,9 +49,11 @@ namespace Adventure_Game_407
                 20, 4, offenseSkill, defenseSkill );
             //var magic2 = new MagicalMonster("Anthony", new Weapon(1, 3, true), new Armor(5), 
             //    10, 4, offenseSkill, defenseSkill);
-            magic1.Fight(creature1);          
-
-            Console.ReadLine();
+            magic1.Fight(creature1);
+            
+            var controller = new Controller();
+            controller.StartGame();
         }
+
     }
 }
