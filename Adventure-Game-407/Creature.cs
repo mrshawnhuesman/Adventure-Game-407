@@ -7,7 +7,7 @@ namespace Adventure_Game_407
     public class Creature
     {
         protected Weapon Weapon { get; set; }    //creature weapon
-        public Armor Armor { get; set; }      //creature armor
+        public Armor Armor { get; set; }        //creature armor
         protected int Hitpoints { get; set; }    //creature hit points
         protected string Name { get; set; }      //creature name
         protected Room Room { get; set; }        //creature current room location
@@ -21,8 +21,7 @@ namespace Adventure_Game_407
         //Fight method will compute the result of a fight between 2 creatures
         //A creature will be defeated if the hitpoints dropped to 0
         public void Fight(Creature opponent)
-        {
-            int chanceOfHit, index, WeaponDamage, InflictedDamage, TotalDamage, DamageReduction = 0;
+        {      
             bool usedDefense = false;
             MagicalMonster currentMagicalMonster = null, opponentMagicalMonster = null;
      
@@ -105,8 +104,7 @@ namespace Adventure_Game_407
         {
             var weaponDamage = 0;
             var totalWeaponDamage = 0;
-            for (int i = 0; i < Weapon.NumAttacks; i++)               //loop from 0 till the the max number of weapon attacks - 1 
-            for (int i = 0; i < Weapon.NumAttacks(); i++)               //loop from 0 till the the max number of weapon attacks - 1 
+            for (int i = 0; i < Weapon.NumAttacks; i++)               //loop from 0 till the the max number of weapon attacks - 1
             {
                 var chanceOfHit = StaticRandom.Instance.Next(1, 21);                      //placeholder for random number generator that generates int value between 1 and 21 (inclusive)
                 if (chanceOfHit > opponent.Armor.Strength)                            //if opponent creature armor strength is less than the penetration damage
