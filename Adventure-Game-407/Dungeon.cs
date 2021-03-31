@@ -17,10 +17,10 @@ namespace Adventure_Game_407
         public Room[,] Rooms { get; }
         public int StartRow { get; }
         public int StartCol { get; }
-        public Room Up { get; }
-        public Room Down { get; }
-        public Room Left { get; }
-        public Room Right { get; }
+        public Room Up { get; private set; }
+        public Room Down { get; private set; }
+        public Room Left { get; private set; }
+        public Room Right { get; private set;  }
         
         private int[] _lastVisited;
         private int[] _secondLastVisited;
@@ -33,10 +33,6 @@ namespace Adventure_Game_407
             Rows = 4;
             Cols = 8;
             Rooms = new Room[Rows, Cols];
-            Up = Rooms[CurrentRoom.Row, CurrentRoom.Col + 1];
-            Down = Rooms[CurrentRoom.Row, CurrentRoom.Col - 1];
-            Left = Rooms[CurrentRoom.Row - 1, CurrentRoom.Col];
-            Right = Rooms[CurrentRoom.Row + 1, CurrentRoom.Col];
             var visited = new bool[Rows, Cols];
             
             // initialize all rooms to empty
@@ -70,6 +66,9 @@ namespace Adventure_Game_407
             
             // Start in entry room
             CurrentRoom = Rooms[StartRow, StartCol];
+            
+            // Figure out relative position
+            CalculateCurrentRoomPosition();
         }
 
         private void CreateRooms(Room[,] rooms, int row, int col, bool[,] visited, int roomCount)
@@ -127,6 +126,49 @@ namespace Adventure_Game_407
                 // go up
                 CreateRooms(Rooms, row, col + 1, visited, roomCount);
             }
+        }
+        
+        private void CalculateCurrentRoomPosition()
+        {
+            /*
+             * Used to realign relative room position whenever room changes or is initalized
+             */
+            if (CurrentRoom.Col + 1 >= Cols)
+            {
+                Up = null;
+            }
+            else
+            {
+                Up = Rooms[CurrentRoom.Row, CurrentRoom.Col + 1];
+            }
+
+            if (CurrentRoom.Col - 1 < 0)
+            {
+                Down = null;
+            }
+            else
+            {
+                Down = Rooms[CurrentRoom.Row, CurrentRoom.Col - 1];
+            }
+
+            if (CurrentRoom.Row - 1 < 0)
+            {
+                Left = null;
+            }
+            else
+            {
+                Left = Rooms[CurrentRoom.Row - 1, CurrentRoom.Col];
+            }
+
+            if (CurrentRoom.Row + 1 >= Rows)
+            {
+                Right = null;
+            }
+            else
+            {
+                Right = Rooms[CurrentRoom.Row + 1, CurrentRoom.Col];
+            }
+
         }
         
         public bool MoveUp()
