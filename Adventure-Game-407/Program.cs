@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net.Mail;
+using Adventure_Game_407.View;
 
 namespace Adventure_Game_407
 {
@@ -27,23 +28,28 @@ namespace Adventure_Game_407
             }
             */
             
+            /*
             Console.WriteLine("Fight 1");
             Console.WriteLine("\n\n\n");
-            var creature1 = new Monster("Will", new Weapon(), new Armor(), 150, 4  );
-            var creature2 = new Monster("Anthony", new Weapon(), new Armor(), 150, 4  );
+            var creature1 = new Hero("Will", new Weapon(2, 3, false), new Armor(5), 20);
+            var creature2 = new Monster("Anthony", new Weapon(1, 4, true), new Armor(5), 20, 4);
             creature1.Fight(creature2);
+            */
+            
             
             Console.WriteLine("Fight 2");
             Console.WriteLine("\n\n\n");
 
             var offenseSkill = new MagicalSkill("Big Punch", "offensive", 5);
-            var defenseSkill = new MagicalSkill("Big Shield", "defensive", 0.5);
+            var defenseSkill = new MagicalSkill("Teleport", "defensive", 1.0);
             
-            var magic1 = new MagicalMonster("Will", new Weapon(), new Armor(), 150, 4, 
-                offenseSkill, defenseSkill );
-            var magic2 = new MagicalMonster("Anthony", new Weapon(), new Armor(), 150, 4,
-                offenseSkill, defenseSkill);
-            magic1.Fight(magic2);
+            var creature1 = new Hero("Anthony", new Weapon(2, 3, false), new Armor(5), 20);
+            
+            var magic1 = new MagicalMonster("Will", new Weapon(1, 3, false), new Armor(5),
+                20, 4, offenseSkill, defenseSkill );
+            //var magic2 = new MagicalMonster("Anthony", new Weapon(1, 3, true), new Armor(5), 
+            //    10, 4, offenseSkill, defenseSkill);
+            magic1.Fight(creature1);          
 
             Console.ReadLine();
         }

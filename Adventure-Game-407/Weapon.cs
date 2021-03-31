@@ -76,5 +76,34 @@ namespace Adventure_Game_407
             else if (NumAttacks == 2 && MaxDamage == 5 && IsMagical)
                 Name = "Magic School Bus";
         }
+        public int CompareTo(Weapon weapon)
+        {
+            var currentIsMagical = this.IsMagical;
+            var currentNumAttacks = this.NumAttacks;
+            var currentMaxDamage = this.MaxDamage;
+            
+            // IsMagical carries most weight
+            if (currentIsMagical && weapon.IsMagical == false)
+                return 1;
+            if (weapon.IsMagical && currentIsMagical == false)
+                return -1;
+            // if isMagical is true for both, or false for both, compare MaxDamage and NumAttacks
+            if (currentNumAttacks > weapon.NumAttacks && currentMaxDamage > weapon.MaxDamage)
+                return 1;
+            if (weapon.NumAttacks > currentNumAttacks && weapon.MaxDamage > currentMaxDamage)
+                return -1;
+            // MaxDamage carries second most weight
+            if (currentMaxDamage > weapon.MaxDamage)
+                return 1;
+            if (weapon.MaxDamage > currentMaxDamage)
+                return -1;
+            // NumAttacks carries the least weight
+            if (currentNumAttacks > weapon.NumAttacks)
+                return 1;
+            if (weapon.NumAttacks > currentNumAttacks)
+                return -1;
+            
+            return 0;
+        }
     }
 }
