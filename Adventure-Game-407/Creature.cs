@@ -82,9 +82,6 @@ namespace Adventure_Game_407
                     Console.WriteLine(opponent.Name + " takes no damage from " + Name + "" + "'s attacks.");
                 }
 
-
-
-
                 //if the opponent still alive then opponent will fight back
                 if (opponent.IsAlive()) opponent.Fight(this);
 
@@ -94,8 +91,7 @@ namespace Adventure_Game_407
                     Console.WriteLine(Name + " wins!");
                 }
             }
-        }
-        
+        }        
 
         //method that will compute and return the weapon damage based on the opponent armor strength and current creature weapon
         //also displays computation results to the console
@@ -165,26 +161,5 @@ namespace Adventure_Game_407
 
             return move;
         }
-
-            /*
-            if (generateMove == 1)                      //if generate move return 1, magical monster will use weapon attack
-            {
-                
-            }
-            else if (generateMove == 2)                 //if generate move return 2, magical monster casts magical attack
-            {
-                attackDamage = currentMagicalMonster.OffensiveSkill.OffensiveDamage;
-                Console.WriteLine(Name + " cast offensive " + currentMagicalMonster.OffensiveSkill.Name
-                + " for " + attackDamage + " damage");
-            }
-            else                                        //else magical monster casts defensive skill
-            {
-
-                currentMagicalMonster.CurrentMagicDefense = currentMagicalMonster.DefensiveSkill.DefensiveValue;
-                usedDefense = true;
-                Console.WriteLine(Name + " cast defensive " + currentMagicalMonster.DefensiveSkill.Name
-                + " for " + currentMagicalMonster.DefensiveSkill.DefensiveValue * 100 + "% defense next round.");
-            }
-        }*/
     }
 }

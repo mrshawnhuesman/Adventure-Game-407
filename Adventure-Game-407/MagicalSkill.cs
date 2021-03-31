@@ -11,26 +11,19 @@ namespace Adventure_Game_407
         public string Name { get; }            //name of the skill
         public string Type { get; }            //there are 2 type of Skills: offensive skill and defensive skill
 
-        //MagicalSkil constructor for type offensive
-        public MagicalSkill(string name, string type, int offensiveDamage)
+        //MagicalSkil constructor
+        public MagicalSkill(string name, string type, int value)
         {
             Name = name;
             Type = type;
             if (type.Equals("offensive"))
             {
-                OffensiveDamage = offensiveDamage;
-            }    
-        }
-
-        //MagicalSkil constructor for type defensive
-        public MagicalSkill(string name, string type, double defenseMultiplier)
-        {
-            Name = name;
-            Type = type;
-            if (type.Equals("defensive"))      
+                OffensiveDamage = value;
+            }
+            else
             {
-                DefensiveValue = defenseMultiplier;
-            }     
+                DefensiveBuff = value;
+            }
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Net.Mail;
-using Adventure_Game_407.View;
+//using Adventure_Game_407.View;
 
 namespace Adventure_Game_407
 {
@@ -41,15 +41,14 @@ namespace Adventure_Game_407
             Console.WriteLine("\n\n\n");
 
             var offenseSkill = new MagicalSkill("Big Punch", "offensive", 5);
-            var defenseSkill = new MagicalSkill("Teleport", "defensive", 1.0);
+            var defenseSkill = new MagicalSkill("Teleport", "defensive", 100);
             
             var creature1 = new Hero("Anthony", new Weapon(2, 3, false), new Armor(5), 20);
             
-            var magic1 = new MagicalMonster("Will", new Weapon(1, 3, false), new Armor(5),
-                20, 4, offenseSkill, defenseSkill );
+            var magic1 = new MagicalMonster("Will", new Weapon(1, 3, false), new Armor(5), 20, 4, offenseSkill, defenseSkill );
             //var magic2 = new MagicalMonster("Anthony", new Weapon(1, 3, true), new Armor(5), 
             //    10, 4, offenseSkill, defenseSkill);
-            magic1.Fight(creature1);          
+            magic1.Fight(creature1);        
 
             Console.ReadLine();
         }
