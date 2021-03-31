@@ -4,9 +4,9 @@ namespace Adventure_Game_407
 {
     public class Weapon : Item
     {
-        public int NumAttacks { get; private set; }
-        public int MaxDamage { get; private set; }
-        private bool IsMagical;
+        public int NumAttacks { get; set; }
+        public int MaxDamage { get; set; }
+        private readonly bool IsMagical;
 
         public Weapon()
         {
@@ -26,12 +26,22 @@ namespace Adventure_Game_407
             GenerateName();
         }
 
+        //Weapon constructor that automatically assign the weapon name
         public Weapon(int numAttacks, int maxDamage, bool isMagical)
         {
             NumAttacks = numAttacks;
             MaxDamage = maxDamage;
             IsMagical = isMagical;
             GenerateName();
+        }
+
+        //Weapon constructure that takes 4 parameters : number of attacks, max weapon damage, weapon type, and weapon name
+        public Weapon(int numAttacks, int maxDamage, bool isMagical, string name)
+        {
+            NumAttacks = numAttacks;
+            MaxDamage = maxDamage;
+            IsMagical = isMagical;
+            Name = name;
         }
 
         public void GenerateName()

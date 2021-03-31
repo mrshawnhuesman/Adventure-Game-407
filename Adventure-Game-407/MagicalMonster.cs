@@ -5,7 +5,6 @@ namespace Adventure_Game_407
     public class MagicalMonster : Creature
     {
         private readonly int Aggression;
-        //public double DefensiveValue { get; set; }
         public MagicalSkill OffensiveSkill { get; set; }
         public MagicalSkill DefensiveSkill { get; set; }
         public double CurrentMagicDefense { get; set; }
@@ -20,6 +19,6 @@ namespace Adventure_Game_407
             Aggression = aggression;
             DefensiveSkill = defensiveSkill;
             OffensiveSkill = offensiveSkill;
-        }       
+        }
     }
 }
