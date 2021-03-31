@@ -70,12 +70,11 @@ namespace Adventure_Game_407
                 if (opponent.IsAlive()) opponent.Fight(this);
             }
 
-            /*
             while (IsAlive() && opponent.IsAlive())                                 //while loop that will run until one of creatures is not alive
             {
-                //int DamageReduction = 0;
+                int DamageReduction = 0;
                 
-                for (index = 0; index < Weapon.NumAttacks(); index++)               //loop from 0 till the the max number of weapon attacks - 1 
+                for (index = 0; index < Weapon.NumAttacks(); index++)               //loop from 0 till the the max number of weapon attacks - 1 (per turn)
                 {   
                     chanceOfHit = StaticRandom.Instance.Next(1, 21);                      //placeholder for random number generator that generates int value between 1 and 21 (inclusive)
                     if (chanceOfHit > opponent.Armor.Strength)                            //if opponent creature armor strength is less than the penetration damage
@@ -93,7 +92,7 @@ namespace Adventure_Game_407
 
                             //if current creature is a magical monster and has defensive skill                             
                             int offenseSkillAmt = 0;  //if current creature is a magical monster and has offensive skill
-                            var rand = StaticRandom.Instance.Next(100);                           //generate random number - probability for current monster defensive or offensive skill activation
+                            var rand = StaticRandom.Instance.Next(100);                             //generate random number - probability for current monster defensive or offensive skill activation
                             
                             if (rand >= 0 && rand < 50)                                           //if it rolls value between 0 to 30 exclusive then cast defensive skill                                                        
                             {
@@ -126,13 +125,12 @@ namespace Adventure_Game_407
                     if (opponent.IsAlive()) opponent.Fight(this);                                              //if the opponent is still alive, then the opponent will fight back by calling Fight(...) method        
                 }
             }
-            */
         }
 
         private int UseWeapon(Creature opponent)
         {
             var weaponDamage = 0;
-            for (int i = 0; i < Weapon.NumAttacks; i++)               //loop from 0 till the the max number of weapon attacks - 1 
+            for (int i = 0; i < Weapon.NumAttacks(); i++)               //loop from 0 till the the max number of weapon attacks - 1 
             {
                 var chanceOfHit = StaticRandom.Instance.Next(1, 21);                      //placeholder for random number generator that generates int value between 1 and 21 (inclusive)
                 if (chanceOfHit > opponent.Armor.Strength)                            //if opponent creature armor strength is less than the penetration damage
