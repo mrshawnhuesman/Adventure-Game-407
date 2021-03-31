@@ -1,5 +1,4 @@
 ﻿using System;
-#pragma warning disable IDE0038
 
 namespace Adventure_Game_407
 {

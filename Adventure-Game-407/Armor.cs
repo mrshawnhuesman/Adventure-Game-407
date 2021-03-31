@@ -1,8 +1,10 @@
-﻿namespace Adventure_Game_407
+﻿#pragma warning disable IDE0060
+
+namespace Adventure_Game_407
 {
     public class Armor : Item
     {
-        public int Strength { get; }
+        public int Strength { get; set;  }
 
         public Armor()
         {
@@ -11,6 +13,12 @@
         }
 
         public Armor(int strength)
+        {
+            Strength = strength;
+            GenerateName();
+        }
+
+        public Armor(int strength, string name)
         {
             Strength = strength;
             GenerateName();
