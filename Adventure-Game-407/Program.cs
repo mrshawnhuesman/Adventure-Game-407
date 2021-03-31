@@ -44,7 +44,8 @@ namespace Adventure_Game_407
             var magic2 = new MagicalMonster("Anthony", new Weapon(), new Armor(), 150, 4,
                 offenseSkill, defenseSkill);
             magic1.Fight(magic2);
-        }
 
+            Console.ReadLine();
+        }
     }
 }
