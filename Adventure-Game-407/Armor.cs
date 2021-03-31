@@ -27,5 +27,14 @@
             else
                 Name = "Weak Armor";
         }
+        public int CompareTo(Armor armor)
+        {
+            var currentArmor = this.Strength;
+            if (currentArmor > armor.Strength)
+                return 1;
+            else if (currentArmor == this.Strength)
+                return 0;
+            return -1;
+        }
     }
 }
