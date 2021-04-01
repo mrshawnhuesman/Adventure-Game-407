@@ -77,7 +77,8 @@ namespace Adventure_Game_407
                 }
             }
         }
-
+        
+        /*
         //UseItem will let Hero use an item from inventory
         public void UseItem()
         {
@@ -107,6 +108,7 @@ namespace Adventure_Game_407
                 Inventory.RemoveAt(index);
             }
         }    
+        */
         
         //PickUp method that will add an item to hero item inventory
         public void PickUp(Item item)

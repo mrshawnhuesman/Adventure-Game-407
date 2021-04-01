@@ -5,8 +5,8 @@ namespace Adventure_Game_407
     //creature class - super class of subclasses hero, monster, and magical monster
     public abstract class Creature
     {
-        public Weapon Weapon { get; protected set; }        //creature weapon
-        public Armor Armor { get; protected set; }          //creature armor
+        public Weapon Weapon { get; set; }        //creature weapon
+        public Armor Armor { get; set; }          //creature armor
         public int MaxHitPoints { get; protected set; }     //creature maximum hit points
         public int CurrentHitPoints { get; protected set; } //creature current hit points
         public string Name { get; set; }        //creature name

@@ -37,13 +37,14 @@ namespace Adventure_Game_407
         public int Row { get; }
         public int Col { get;  }
         
-        // todo: add monster
+        public Creature Monster { get; set; }
 
         public Room(char type, int row, int col)
         {
             /*
              * Constructor for room with specified type.
-             * Randomly generates loot
+             * Randomly generates 0 or more loot
+             * Randomly generates 0-1 monster(s)
              */
             Row = row;
             Col = col;
@@ -60,6 +61,17 @@ namespace Adventure_Game_407
             }
 
             GenerateLoot();
+            CheckForMonster();
+        }
+        
+        public bool isEmpty()
+        {
+            if (Type == ' ')
+            {
+                return true;
+            }
+
+            return false;
         }
 
         private void GenerateLoot()
@@ -72,8 +84,8 @@ namespace Adventure_Game_407
              *
              * For each piece of loot, here are the chances for the type:
              * 10/30 - Treasure (1-100)
-             *  5/30 - Weapon  
-             *  5/30 - Armor
+             *  5/30 - Weapon  + Treasure (1-100)
+             *  5/30 - Armor   + Treasure (1-100)
              *  5/30 - Health Potion
              *  5/30 - Magic Dampening Scroll
              */
@@ -92,16 +104,20 @@ namespace Adventure_Game_407
                 Loot.Add(new Treasure(rollForTreasureAmt + 1));
             }
             
-            // Weapon 5/30
+            // Weapon 5/30 + Treasure
             else if (rollForLoot >= 10 && rollForLoot < 15)
             {
+                var rollForTreasureAmt = StaticRandom.Instance.Next(100);
+                Loot.Add(new Treasure(rollForTreasureAmt + 1));
                 Loot.Add(new Weapon());
             }
             
-            // Armor 5/30
+            // Armor 5/30 + Treasure
             else if (rollForLoot >= 15 && rollForLoot < 20)
             {
-                //todo
+                var rollForTreasureAmt = StaticRandom.Instance.Next(100);
+                Loot.Add(new Treasure(rollForTreasureAmt + 1));
+                Loot.Add(new Armor());
             }
             
             // Health Potion 5/30
@@ -113,20 +129,109 @@ namespace Adventure_Game_407
             // Magic Dampening Scroll 5/30
             else
             {
-                //todo
+                // Magic Dampening Scroll turns type into M, all magic abilites and weapons do not posses extra damage or swings
+                Loot.Add(new Scroll());
             }
             
             GenerateLoot();
+            CheckForMonster();
         }
 
-        public bool isEmpty()
+        private void CheckForMonster()
         {
-            if (Type == ' ')
+            var rollForMonster = StaticRandom.Instance.Next(2);
+            // 'found' monster
+            if (rollForMonster == 1)
+            {
+                CreateMonster();
+            }
+        }
+
+        private void CreateMonster()
+        {
+            // check for monster name
+            var monsterNames = new string[]
+            {
+                "Seth Adjei", "Shahid Noor", "Aziz Bahha", "Chris Brewer",
+                "Alina Campan", "Nicholas Caporusso", "Ankur Chattopadhyay",
+                "Samuel Cho", "Scot Cunningham", "Maureen Doyle", 
+                "Charles Frank", "Wei Hao", "Yi Hu", "Rasib Khan",
+                "John Musgrave", "Gary Newell", "Ken Roth", "Emily Taylor",
+                "Bradford Thomas", "Cynthia Thomas", "Marius Truta",
+                "Anthony Tsetse", "James Walden", "Hongmei Wang", 
+                "Jeff Ward", "Junxiu Zhou"
+            };
+            var rollNameIndex = StaticRandom.Instance.Next(monsterNames.Length);
+            var monsterName = monsterNames[rollNameIndex];
+            
+            // check for monster hitpoints (10-75)
+            var monsterHitpoints = StaticRandom.Instance.Next(10, 75 + 1);
+            
+            // check for monster aggression (1-3)
+            var monsterAggression = StaticRandom.Instance.Next(1, 3 + 1);
+            
+            // check type of monster: physical or magical
+            var rollForMonsterType = StaticRandom.Instance.Next(1 + 1);
+            // physical monster
+            if (rollForMonsterType == 0)
+            {
+                Monster = new PhysicalMonster(monsterName, new Weapon(), new Armor(), 
+                    monsterHitpoints, monsterAggression );
+            }
+            // magical monster
+            else
+            {
+                // check for magical offense and defense abilities
+                var magicalOffenseAbilities = new []
+                {
+                    new MagicalSkill( "Fast Lecture", "offensive", 5),
+                    new MagicalSkill( "Long Homework", "offensive", 10),
+                    new MagicalSkill( "Bad Grade", "offensive", 15)
+                };
+                var magicalDefenseAbilities = new []
+                {
+                    new MagicalSkill( "Class is Virtual Today", "defensive", 10),
+                    new MagicalSkill( "No Office Hours Today", "defensive", 20),
+                };
+                
+                var rollOffenseIndex = StaticRandom.Instance.Next(magicalOffenseAbilities.Length);
+                var monsterOffenseAbility = magicalOffenseAbilities[rollOffenseIndex];
+                var rollDefenseIndex = StaticRandom.Instance.Next(magicalDefenseAbilities.Length);
+                var monsterDefenseAbility = magicalDefenseAbilities[rollDefenseIndex];
+                
+                Monster = new MagicalMonster(monsterName, new Weapon(), new Armor(),
+                    monsterHitpoints, monsterAggression, monsterOffenseAbility, 
+                    monsterDefenseAbility  );
+            }
+        }
+
+        public bool HasMonster()
+        {
+            if (Monster != null)
             {
                 return true;
             }
 
             return false;
+        }
+
+        public int CheckMonsterAggro()
+        {
+            if (HasMonster())
+            {
+                if (Monster is MagicalMonster)
+                {
+                    return ((MagicalMonster) Monster).Aggression;
+                }
+                else
+                {
+                    return ((PhysicalMonster) Monster).Aggression;
+                }
+            }
+            else
+            {
+                return -1;
+            }
         }
     }
 }
