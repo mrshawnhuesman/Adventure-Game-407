@@ -5,7 +5,7 @@ namespace Adventure_Game_407
 {
     public class PhysicalMonster : Creature
     {   
-        private readonly int Aggression;    //monster agression level (1 is low, 3 is high)
+        public readonly int Aggression;    //monster agression level (1 is low, 3 is high)
         private readonly Weapon naturalWeapon = new Weapon (1, 2, false, "claw");   //default monster armor which is the natural armor
         private readonly Armor naturalArmor = new Armor (1, "tough skin");          //default monster armor which is the natural armor
 
