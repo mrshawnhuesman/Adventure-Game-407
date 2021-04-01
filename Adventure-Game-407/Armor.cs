@@ -44,5 +44,19 @@ namespace Adventure_Game_407
                 return 0;
             return -1;
         }
+
+        public override void Use()
+        {
+            var ownerArmor = Owner.Armor;
+            Owner.Armor = this;
+            if (Owner is Hero)
+            {
+                ((Hero) Owner).Inventory.Add(ownerArmor);
+            }
+            else
+            {
+                ownerArmor.Drop();
+            }
+        }
     }
 }
