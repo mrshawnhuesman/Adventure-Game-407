@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.Win32;
+using Adventure_Game_407.View;
+#pragma warning disable IDE0038;
 
 namespace Adventure_Game_407
 {
@@ -67,25 +69,44 @@ namespace Adventure_Game_407
 
                 //if the opponent dies, display win message to console
                 else
-                {
-                    Console.WriteLine("HERO - " + Name + " terminated " + opponent.Name);           
+                {   
+                    Console.WriteLine("HERO - " + Name + " terminated " + opponent.Name);
+                    Weapon.NumAttackBuff = 0;   //reset number attack buff to 0 when battle is ended - target is terminated
+                    Weapon.DamageBuff = 0;      //reset damage attack buff to 0 when battle is ended - target is terminated
+                    
                 }
             }
         }
 
-        /* 
         //UseItem will let Hero use an item from inventory
         public void UseItem()
         {
-           for (int index = 0; index < Inventory.Count; index++)
-           {
-                Console.WriteLine(index + " : " + Inventory[index]);
-           }
-            Console.WriteLine(" Select the index of the item that you would like to use: ");
-            Console.ReadLine;
-        }
-        */
-
+            CLIView cliView = new CLIView();
+            cliView.ShowHeroInventory(this);
+            int index = cliView.AskUserInputInteger(" Select the index of the item that you would like to use: ");
+            Item item = Inventory[index];
+            if (item is HealthPotion)          //if selected item is a potion, restore hero hit points and remove used potion from inventory
+            {
+                RestoreHealth(((HealthPotion)item).RestoreAmount);
+                Inventory.RemoveAt(index);                
+            }
+            else if (item is Armor)           //else if selected item is an armor, swap armor
+            {
+                Armor = (Armor)item;
+                Inventory[index] = item;
+            }
+            else if (item is Weapon)          //else if selected item is weapon, swap weapon
+            {
+                Weapon = (Weapon)item;
+                Inventory[index] = item;
+            }
+            else                              //else it is a scroll, use scroll and remove used scroll form inventory                   
+            {
+                ((Scroll)item).useScroll;
+                Inventory.RemoveAt(index);
+            }
+        }    
+        
         //PickUp method that will add an item to hero item inventory
         public void PickUp(Item item)
         {
@@ -114,6 +135,6 @@ namespace Adventure_Game_407
                 Console.WriteLine(e.ToString());
                 Console.WriteLine("Unable to drop item from inventory index: " + inventoryNumber);
             }
-        }        
+        }  
     }
 }

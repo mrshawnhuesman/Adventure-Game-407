@@ -53,7 +53,7 @@ namespace Adventure_Game_407
                 if (opponent is MagicalMonster && ((MagicalMonster)opponent).DamageReductionBuff > 0)
                 {
                     var damageReduction = (int)(attackDamage * ((MagicalMonster)opponent).DamageReductionBuff / 100);
-                    attackDamage = attackDamage - damageReduction;
+                    attackDamage -= damageReduction;
                     ((MagicalMonster)opponent).DamageReductionBuff = 0;     //reset opponent damage reduction buff to 0 after being used to reduce damage
                 }
                 
@@ -76,14 +76,8 @@ namespace Adventure_Game_407
 
                 //if the opponent dies, display win message to console
                 else
-                {   
-                    if (opponent is Hero)
-                    {
-                        Console.WriteLine("HERO - " + opponent.Name + " has failed....GAME OVER");
-                    } else
-                    {
-                        Console.WriteLine(Name + " terminated " + opponent.Name);
-                    }                 
+                {               
+                        Console.WriteLine("HERO - " + opponent.Name + " has failed....GAME OVER");                        
                 }
             }
         }
