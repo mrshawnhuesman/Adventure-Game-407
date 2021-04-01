@@ -1,8 +1,10 @@
-﻿namespace Adventure_Game_407
+﻿#pragma warning disable IDE0060
+
+namespace Adventure_Game_407
 {
     public class Armor : Item
     {
-        public int Strength { get; set; }
+        public int Strength { get; set;  }
 
         public Armor()
         {
@@ -10,18 +12,16 @@
             GenerateName();
         }
 
-        //Armor constructor that only take a parameter int strength with auto generated name
         public Armor(int strength)
         {
             Strength = strength;
             GenerateName();
         }
 
-        //Armor constructor that takes 2 parameter: int strength and string name
         public Armor(int strength, string name)
         {
             Strength = strength;
-            Name = name;
+            GenerateName();
         }
 
         public void GenerateName()
