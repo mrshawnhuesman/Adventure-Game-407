@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.Win32;
-using Adventure_Game_407.View;
-#pragma warning disable IDE0038;
+
+#pragma warning disable IDE0038
 
 namespace Adventure_Game_407
 {
@@ -82,8 +82,9 @@ namespace Adventure_Game_407
         //UseItem will let Hero use an item from inventory
         public void UseItem()
         {
-            CLIView cliView = new CLIView();
-            cliView.ShowHeroInventory(this);
+            //CLIView cliView = new CLIView();
+            //cliView.ShowHeroInventory(this);
+            ShowHeroInventory(this);
             int index = cliView.AskUserInputInteger(" Select the index of the item that you would like to use: ");
             Item item = Inventory[index];
             if (item is HealthPotion)          //if selected item is a potion, restore hero hit points and remove used potion from inventory
