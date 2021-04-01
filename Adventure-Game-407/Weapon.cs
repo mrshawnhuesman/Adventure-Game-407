@@ -48,6 +48,15 @@ namespace Adventure_Game_407
 
         public void GenerateName()
         {
+            var miscellaneousWeaponNames = new string[]
+            {
+                "Handheld Fan",
+                "Dr. Fox's Pen",
+                "Computer",
+                "Computer Mouse",
+                "COBOL: The Programming Language",
+            };
+            
             if (NumAttacks == 1 && MaxDamage < 3 && IsMagical == false)
                 Name = "Teddy Bear";
             
@@ -77,7 +86,14 @@ namespace Adventure_Game_407
             
             else if (NumAttacks == 2 && MaxDamage == 5 && IsMagical)
                 Name = "Magic School Bus";
+
+            else
+            {
+                var rollName = StaticRandom.Instance.Next(miscellaneousWeaponNames.Length);
+                Name = miscellaneousWeaponNames[rollName];
+            }
         }
+        
         public int CompareTo(Weapon weapon)
         {
             var currentIsMagical = this.IsMagical;
@@ -106,6 +122,20 @@ namespace Adventure_Game_407
                 return -1;
             
             return 0;
+        }
+
+        public override void Use()
+        {
+            var ownerWeapon = Owner.Weapon;
+            Owner.Weapon = this;
+            if (Owner is Hero)
+            {
+                ((Hero) Owner).Inventory.Add(ownerWeapon);
+            }
+            else
+            {
+                ownerWeapon.Drop();
+            }
         }
     }
 }
