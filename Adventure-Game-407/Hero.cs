@@ -17,7 +17,8 @@ namespace Adventure_Game_407
             Armor = armor;
             MaxHitPoints = hitpoints;
             CurrentHitPoints = hitpoints;
-            Inventory = new List<Item>(InventoryCapacity) { weapon, armor };         
+            Inventory = new List<Item>(InventoryCapacity) { weapon, armor };
+            Room = null;
         }
 
         //Hero Move during Fight is weapon attack
