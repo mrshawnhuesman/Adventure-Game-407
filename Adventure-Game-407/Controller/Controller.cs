@@ -1,4 +1,4 @@
-﻿using Adventure_Game_407.View;
+﻿﻿﻿using Adventure_Game_407.View;
 
 namespace Adventure_Game_407
 {
@@ -13,6 +13,7 @@ namespace Adventure_Game_407
             View = new CLIView();
             View.AskHeroForName(hero);
             PutHeroInDungeon(hero, dungeon);
+            //View.AskHeroToMoveInDungeon(hero, dungeon);
         }
 
         private void PutHeroInDungeon(Hero hero, Dungeon dungeon)
