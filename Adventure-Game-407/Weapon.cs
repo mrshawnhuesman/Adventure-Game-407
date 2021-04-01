@@ -6,6 +6,8 @@ namespace Adventure_Game_407
     {
         public int NumAttacks { get; set; }
         public int MaxDamage { get; set; }
+        public int DamageBuff { get; set; }
+        public int NumAttackBuff { get; set; }
         private readonly bool IsMagical;
 
         public Weapon()
