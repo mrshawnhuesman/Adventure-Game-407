@@ -66,6 +66,8 @@ namespace Adventure_Game_407
             
             // Start in entry room
             CurrentRoom = Rooms[StartRow, StartCol];
+            // Remove monsters from entry room
+            CurrentRoom.Monster = null;
             
             // Figure out relative position
             CalculateCurrentRoomPosition();
@@ -117,13 +119,13 @@ namespace Adventure_Game_407
                 _lastVisited[0] = row;
                 _lastVisited[1] = col;
 
-                // go down
-                CreateRooms(Rooms, row, col - 1, visited, roomCount);
-                // go right
-                CreateRooms(Rooms, row + 1, col, visited, roomCount);
                 // go left
-                CreateRooms(Rooms, row - 1, col, visited, roomCount);
+                CreateRooms(Rooms, row, col - 1, visited, roomCount);
                 // go up
+                CreateRooms(Rooms, row + 1, col, visited, roomCount);
+                // go down
+                CreateRooms(Rooms, row - 1, col, visited, roomCount);
+                // go right
                 CreateRooms(Rooms, row, col + 1, visited, roomCount);
             }
         }
@@ -133,86 +135,122 @@ namespace Adventure_Game_407
             /*
              * Used to realign relative room position whenever room changes or is initalized
              */
-            if (CurrentRoom.Col + 1 >= Cols)
+            if (CurrentRoom.Row - 1 < 0)
             {
                 Up = null;
             }
             else
             {
-                Up = Rooms[CurrentRoom.Row, CurrentRoom.Col + 1];
+                Up = Rooms[CurrentRoom.Row - 1, CurrentRoom.Col];
             }
 
-            if (CurrentRoom.Col - 1 < 0)
+            if (CurrentRoom.Row + 1 >= Rows)
             {
                 Down = null;
             }
             else
             {
-                Down = Rooms[CurrentRoom.Row, CurrentRoom.Col - 1];
+                Down = Rooms[CurrentRoom.Row + 1, CurrentRoom.Col];
             }
 
-            if (CurrentRoom.Row - 1 < 0)
+            if (CurrentRoom.Col - 1 < 0)
             {
                 Left = null;
             }
             else
             {
-                Left = Rooms[CurrentRoom.Row - 1, CurrentRoom.Col];
+                Left = Rooms[CurrentRoom.Row, CurrentRoom.Col - 1];
             }
 
-            if (CurrentRoom.Row + 1 >= Rows)
+            if (CurrentRoom.Col + 1 >= Cols)
             {
                 Right = null;
             }
             else
             {
-                Right = Rooms[CurrentRoom.Row + 1, CurrentRoom.Col];
+                Right = Rooms[CurrentRoom.Row, CurrentRoom.Col + 1];
             }
 
         }
-        
-        public bool MoveUp()
+
+        public bool CanMoveUp()
         {
             if (Up != null && !Up.isEmpty())
             {
-                CurrentRoom = Up;
                 return true;
             }
 
             return false;
         }
 
-        public bool MoveDown()
+        public bool CanMoveDown()
         {
             if (Down != null && !Down.isEmpty())
             {
-                CurrentRoom = Down;
                 return true;
             }
 
             return false;
         }
 
-        public bool MoveLeft()
+        public bool CanMoveLeft()
         {
             if (Left != null && !Left.isEmpty())
             {
-                CurrentRoom = Left;
                 return true;
             }
 
             return false;
         }
 
-        public bool MoveRight()
+        public bool CanMoveRight()
         {
             if (Right != null && !Right.isEmpty())
             {
-                CurrentRoom = Right;
                 return true;
             }
 
             return false;
+        }
+
+        public void MoveUp()
+        {
+            if (CanMoveUp())
+            {
+                CurrentRoom = Up;
+            }
+            
+            CalculateCurrentRoomPosition();
+        }
+        
+        public void MoveDown()
+        {
+            if (CanMoveDown())
+            {
+                CurrentRoom = Down;
+            }
+            
+            CalculateCurrentRoomPosition();
+        }
+        
+        public void MoveLeft()
+        {
+            if (CanMoveLeft())
+            {
+                CurrentRoom = Left;
+            }
+            
+            CalculateCurrentRoomPosition();
+        }
+        
+        public void MoveRight()
+        {
+            if (CanMoveRight())
+            {
+                CurrentRoom = Right;
+            }
+            
+            CalculateCurrentRoomPosition();
         }
     }
 }

@@ -8,6 +8,8 @@ namespace Adventure_Game_407
     {
         public static void Main(string[] args)
         {
+            Controller controller = new Controller();
+            controller.StartGame();
             /*
             Dungeon dungeon = new Dungeon();
             var rooms = dungeon.Rooms;
@@ -36,6 +38,7 @@ namespace Adventure_Game_407
             creature1.Fight(creature2);
             */            
             
+            /*
             Console.WriteLine("Fight 2");
             Console.WriteLine("\n");
 
@@ -50,6 +53,7 @@ namespace Adventure_Game_407
             magic1.Fight(creature1);        
 
             Console.ReadLine();
+            */
         }
     }
 }
