@@ -95,13 +95,17 @@ namespace Adventure_Game_407
             // Weapon 5/30
             else if (rollForLoot >= 10 && rollForLoot < 15)
             {
+                var rollForTreasureAmt = StaticRandom.Instance.Next(100);
+                Loot.Add(new Treasure(rollForTreasureAmt + 1));
                 Loot.Add(new Weapon());
             }
             
             // Armor 5/30
             else if (rollForLoot >= 15 && rollForLoot < 20)
             {
-                //todo
+                var rollForTreasureAmt = StaticRandom.Instance.Next(100);
+                Loot.Add(new Treasure(rollForTreasureAmt + 1));
+                Loot.Add(new Armor());
             }
             
             // Health Potion 5/30
@@ -113,7 +117,8 @@ namespace Adventure_Game_407
             // Magic Dampening Scroll 5/30
             else
             {
-                //todo
+                // Magic Dampening Scroll turns type into M, all magic abilites and weapons do not posses extra damage or swings
+                Loot.Add(new Scroll());
             }
             
             GenerateLoot();
