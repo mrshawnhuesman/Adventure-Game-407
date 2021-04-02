@@ -1,4 +1,6 @@
-﻿namespace Adventure_Game_407
+﻿using System;
+
+namespace Adventure_Game_407
 {
     // Scroll class
     public class Scroll : Item
@@ -7,6 +9,7 @@
         public override void Use()
         {
             RoomOccupied.Type = 'M';
+            RemoveItemFromInventory();
         }
     }
 }
