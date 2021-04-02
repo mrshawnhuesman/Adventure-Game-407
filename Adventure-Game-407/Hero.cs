@@ -86,7 +86,7 @@ namespace Adventure_Game_407
                 //if the opponent dies, display win message to console
                 else
                 {   
-                    Console.WriteLine("HERO - " + Name + " terminated " + opponent.Name);
+                    Console.WriteLine("HERO - " + Name + " terminated " + opponent.Name); 
                 }
             }
         }      
