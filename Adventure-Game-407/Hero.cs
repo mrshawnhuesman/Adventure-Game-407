@@ -72,9 +72,6 @@ namespace Adventure_Game_407
                 else
                 {   
                     Console.WriteLine("HERO - " + Name + " terminated " + opponent.Name);
-                    Weapon.NumAttackBuff = 0;   //reset number attack buff to 0 when battle is ended - target is terminated
-                    Weapon.DamageBuff = 0;      //reset damage attack buff to 0 when battle is ended - target is terminated
-                    
                 }
             }
         }      
