@@ -2,6 +2,7 @@
 
 namespace Adventure_Game_407
 {
+    // Item abstract class
     public abstract class Item
     {
         public Creature Owner;

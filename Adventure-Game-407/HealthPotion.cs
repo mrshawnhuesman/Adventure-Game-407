@@ -1,10 +1,9 @@
-﻿using System;
-
-namespace Adventure_Game_407
+﻿namespace Adventure_Game_407
 {
+    // HealthPotion class
     public class HealthPotion : Item
-    {    
-        public int RestoreAmount { get; private set; }
+    {
+        private int RestoreAmount { get; set; }
 
         public HealthPotion()
         {

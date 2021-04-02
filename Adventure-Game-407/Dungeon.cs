@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-
-namespace Adventure_Game_407
+﻿namespace Adventure_Game_407
 {
+    // Dungeon class
     public class Dungeon
     {
         /*
@@ -25,11 +22,9 @@ namespace Adventure_Game_407
         private int[] _lastVisited;
         private int[] _secondLastVisited;
 
+        // Dungeon constructor that generates 8 by 8 dungeon rooms
         public Dungeon()
         {
-            /*
-             * Default Dungeon constructor that generates 8 by 8 dungeon rooms
-             */
             Rows = 4;
             Cols = 8;
             Rooms = new Room[Rows, Cols];
@@ -173,9 +168,10 @@ namespace Adventure_Game_407
 
         }
 
+        // Returns true if Up is not null and not empty
         public bool CanMoveUp()
         {
-            if (Up != null && !Up.isEmpty())
+            if (Up != null && !Up.IsEmpty())
             {
                 return true;
             }
@@ -183,9 +179,10 @@ namespace Adventure_Game_407
             return false;
         }
 
+        // Returns true if Down is not null and not empty
         public bool CanMoveDown()
         {
-            if (Down != null && !Down.isEmpty())
+            if (Down != null && !Down.IsEmpty())
             {
                 return true;
             }
@@ -193,9 +190,10 @@ namespace Adventure_Game_407
             return false;
         }
 
+        // Returns true if Left is not null and not empty
         public bool CanMoveLeft()
         {
-            if (Left != null && !Left.isEmpty())
+            if (Left != null && !Left.IsEmpty())
             {
                 return true;
             }
@@ -203,16 +201,17 @@ namespace Adventure_Game_407
             return false;
         }
 
+        // Returns true if Right is not null and not empty
         public bool CanMoveRight()
         {
-            if (Right != null && !Right.isEmpty())
+            if (Right != null && !Right.IsEmpty())
             {
                 return true;
             }
 
             return false;
         }
-
+        
         public void MoveUp()
         {
             if (CanMoveUp())

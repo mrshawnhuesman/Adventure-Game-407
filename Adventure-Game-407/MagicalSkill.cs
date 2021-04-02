@@ -1,7 +1,4 @@
-﻿using System;
-
-
-namespace Adventure_Game_407
+﻿namespace Adventure_Game_407
 {   
     //Skill class that consist of 2 type of magical skills: offensive and defensive
     public class MagicalSkill
@@ -11,7 +8,7 @@ namespace Adventure_Game_407
         public string Name { get; }            //name of the skill
         public string Type { get; }            //there are 2 type of Skills: offensive skill and defensive skill
 
-        //MagicalSkil constructor
+        //MagicalSkill constructor
         public MagicalSkill(string name, string type, int value)
         {
             Name = name;
