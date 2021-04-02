@@ -81,7 +81,7 @@ namespace Adventure_Game_407
             }
             else if (item is Weapon)
             {
-                Weapon = (Weapon) item;
+                Weapon = (Weapon)item;
             }
         }
     }

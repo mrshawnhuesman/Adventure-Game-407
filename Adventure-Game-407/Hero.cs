@@ -29,12 +29,12 @@ namespace Adventure_Game_407
         //Hero constructor that takes parameter name, weapon, armor, and hitpoints
         public Hero(string name, Weapon weapon, Armor armor, int hitpoints)
         {
+            Inventory = new List<Item>(InventoryCapacity) {};
             Name = name;
             PickUp(weapon);
             PickUp(armor);
             MaxHitPoints = hitpoints;
             CurrentHitPoints = hitpoints;
-            Inventory = new List<Item>(InventoryCapacity) { weapon, armor };
             Room = null;
             BringItemsToRoom();
         }

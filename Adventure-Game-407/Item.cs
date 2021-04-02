@@ -5,7 +5,7 @@ namespace Adventure_Game_407
     // Item abstract class
     public abstract class Item
     {
-        public Creature Owner;
+        public Creature Owner { get; set; }
         public Room RoomOccupied;
         public string Name { get; protected set; }
           
