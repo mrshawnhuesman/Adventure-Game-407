@@ -3,7 +3,7 @@
     // Treasure Class
     public class Treasure : Item
     {
-        private int GoldAmount { get; }
+        public int GoldAmount { get; set; }
 
         // Treasure constructor that sets the GoldAmount
         public Treasure(int goldAmount)

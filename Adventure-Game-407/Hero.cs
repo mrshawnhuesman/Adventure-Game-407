@@ -10,6 +10,7 @@ namespace Adventure_Game_407
     {
         private const int InventoryCapacity = 10;
         public List<Item> Inventory { get; protected set; }
+        public Treasure Gold = new Treasure(0);
   
         //Hero constructor that takes parameter name, weapon, armor, and hitpoints
         public Hero(string name, Weapon weapon, Armor armor, int hitpoints)
@@ -76,49 +77,21 @@ namespace Adventure_Game_407
                     
                 }
             }
-        }
-        
-        /*
-        //UseItem will let Hero use an item from inventory
-        public void UseItem()
-        {
-            //CLIView cliView = new CLIView();
-            //cliView.ShowHeroInventory(this);
-            ShowHeroInventory(this);
-            int index = cliView.AskUserInputInteger(" Select the index of the item that you would like to use: ");
-            Item item = Inventory[index];
-            if (item is HealthPotion)          //if selected item is a potion, restore hero hit points and remove used potion from inventory
-            {
-                RestoreHealth(((HealthPotion)item).RestoreAmount);
-                Inventory.RemoveAt(index);                
-            }
-            else if (item is Armor)           //else if selected item is an armor, swap armor
-            {
-                Armor = (Armor)item;
-                Inventory[index] = item;
-            }
-            else if (item is Weapon)          //else if selected item is weapon, swap weapon
-            {
-                Weapon = (Weapon)item;
-                Inventory[index] = item;
-            }
-            else                              //else it is a scroll, use scroll and remove used scroll form inventory                   
-            {
-                ((Scroll)item).useScroll;
-                Inventory.RemoveAt(index);
-            }
-        }    
-        */
-        
+        }      
+           
         //PickUp method that will add an item to hero item inventory
         public void PickUp(Item item)
         {
-            if (Inventory.Count + 1 <= InventoryCapacity)
+            if (item is Treasure)                               //if it is a tresure, add gold amount to the hero treasure gold amount
+            {
+                Gold.GoldAmount += ((Treasure)item).GoldAmount;
+            }
+            else if (Inventory.Count + 1 <= InventoryCapacity)  //else if inventory is not full, add item to the inventory
             {
                 Inventory.Add(item);
-                item.Owner = this;
+                item.Owner = this;                
             }
-            else
+            else                                                //else display notification showing not enough capacity
             {
                 Console.WriteLine("You do not have the capacity to pickup: " + item.Name);
             }
