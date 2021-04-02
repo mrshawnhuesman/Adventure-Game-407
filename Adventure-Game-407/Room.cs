@@ -19,7 +19,7 @@ namespace Adventure_Game_407
          * 'X' - exit
          * 'B' - Boss
          */
-        public List<Item> Loot { get; }
+        public List<Item> Loot { get; private set; }
 
         private char _type;
         public char Type
@@ -103,36 +103,36 @@ namespace Adventure_Game_407
             {
                 // treasure amount 1-100
                 var rollForTreasureAmt = StaticRandom.Instance.Next(100);
-                Loot.Add(new Treasure(rollForTreasureAmt + 1));
+                AddItemToRoom(new Treasure(rollForTreasureAmt + 1));
             }
             
             // Weapon 5/30 + Treasure
             else if (rollForLoot >= 10 && rollForLoot < 15)
             {
                 var rollForTreasureAmt = StaticRandom.Instance.Next(100);
-                Loot.Add(new Treasure(rollForTreasureAmt + 1));
-                Loot.Add(new Weapon());
+                AddItemToRoom(new Treasure(rollForTreasureAmt + 1));
+                AddItemToRoom(new Weapon());
             }
             
             // Armor 5/30 + Treasure
             else if (rollForLoot >= 15 && rollForLoot < 20)
             {
                 var rollForTreasureAmt = StaticRandom.Instance.Next(100);
-                Loot.Add(new Treasure(rollForTreasureAmt + 1));
-                Loot.Add(new Armor());
+                AddItemToRoom(new Treasure(rollForTreasureAmt + 1));
+                AddItemToRoom(new Armor());
             }
             
             // Health Potion 5/30
             else if (rollForLoot >= 20 && rollForLoot < 25)
             {
-                Loot.Add(new HealthPotion());
+                AddItemToRoom(new HealthPotion());
             }
             
             // Magic Dampening Scroll 5/30
             else
             {
                 // Magic Dampening Scroll turns type into M, all magic abilites and weapons do not posses extra damage or swings
-                Loot.Add(new Scroll());
+                AddItemToRoom(new Scroll());
             }
             
             GenerateLoot();
@@ -237,6 +237,13 @@ namespace Adventure_Game_407
             {
                 return -1;
             }
+        }
+        
+        // add item to room and add item to room's loot bag
+        private void AddItemToRoom(Item item)
+        {
+            Loot.Add(item);
+            item.RoomOccupied = this;
         }
     }
 }
