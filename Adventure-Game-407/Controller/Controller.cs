@@ -9,6 +9,11 @@ namespace Adventure_Game_407
     {
         public CLIView View;
         
+        // Start main game
+        // Creates new hero with randomly generated weapon, armor, and 150 HP
+        // Creates new dungeon
+        // If hero has not died or reach exit, keep showing a main menu 
+        //     and checking for monsters
         public void StartGame()
         {
             Hero hero = new Hero(null, new Weapon(), new Armor(), 150);
@@ -16,6 +21,7 @@ namespace Adventure_Game_407
             View = new CLIView();
             View.AskForHeroName(hero);
             PutHeroInDungeon(hero, dungeon);
+            // main game loop
             while (!HasGameEnded(hero))
             {
                 hero.Room = dungeon.CurrentRoom;
@@ -25,6 +31,10 @@ namespace Adventure_Game_407
             }
         }
 
+        // menu that asks player which to do after each dungeon move:
+        // 1: view inventory, 2: view minimap, 3: inspect room
+        // 4-7 move up, down, left, right respectively provided available
+        // 8: fight monster if available
         private void PerformMainMenuChoice(Hero hero, Dungeon dungeon)
         {
             var menuChoice = View.AskForMainMenuChoice(dungeon, hero);
@@ -89,6 +99,8 @@ namespace Adventure_Game_407
             }
         }
 
+        // shows the inventory and asks which items the hero would like to use
+        // for each item: 1: use 2: drop 3: exit menu
         private void PerformInventoryChoice(Hero hero)
         {
             var inventoryChoice = View.AskForInventoryChoice(hero);
@@ -123,6 +135,9 @@ namespace Adventure_Game_407
             }
         }
 
+        // Checks if room has monster
+        // if monster aggro == 3, automatically fight monster, otherwise
+        // hero can choose to fight monster or not
         private void CheckRoomForMonsters(Hero hero)
         {
             var currentRoom = hero.Room;
@@ -150,13 +165,14 @@ namespace Adventure_Game_407
             }
         }
 
+        // Assign hero to a dungeon  for initial start game
         private void PutHeroInDungeon(Hero hero, Dungeon dungeon)
         {
             // hero starts in entry room
             hero.Room = dungeon.CurrentRoom;
-            View.ShowDungeonMinimap(dungeon, hero);
         }
 
+        // check to end the game if the hero has died or reached the exit
         private bool HasGameEnded(Hero hero)
         {
             // hero has died or reached the exit
