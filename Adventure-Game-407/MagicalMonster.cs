@@ -14,8 +14,8 @@ namespace Adventure_Game_407
         public MagicalMonster(string name, Weapon weapon, Armor armor, int hitpoints, int aggression, MagicalSkill offensiveSkill, MagicalSkill defensiveSkill)
         {
             Name = name;
-            Weapon = weapon;
-            Armor = armor;
+            PickUp(weapon);
+            PickUp(armor);
             MaxHitPoints = hitpoints;
             CurrentHitPoints = hitpoints;
             Aggression = aggression;

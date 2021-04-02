@@ -30,8 +30,8 @@ namespace Adventure_Game_407
         public Hero(string name, Weapon weapon, Armor armor, int hitpoints)
         {
             Name = name;
-            Weapon = weapon;
-            Armor = armor;
+            PickUp(weapon);
+            PickUp(armor);
             MaxHitPoints = hitpoints;
             CurrentHitPoints = hitpoints;
             Inventory = new List<Item>(InventoryCapacity) { weapon, armor };
@@ -92,7 +92,7 @@ namespace Adventure_Game_407
         }      
            
         //PickUp method that will add an item to hero item inventory
-        public void PickUp(Item item)
+        public new void PickUp(Item item)
         {
             if (item is Treasure)                               //if it is a tresure, add gold amount to the hero treasure gold amount
             {

@@ -6,34 +6,9 @@ namespace Adventure_Game_407
     public abstract class Creature
     {
         //creature weapon
-        private Weapon _weapon;
-        public Weapon Weapon {
-            get
-            {
-                return _weapon;
-            }
-            set
-            {
-                Weapon.Owner = this;
-                _weapon = value;
-            } 
-        }
-        
+        public Weapon Weapon;
         //creature armor
-        private Armor _armor;
-        public Armor Armor
-        {
-            get
-            {
-                return _armor;
-            }
-            set
-            {
-                Armor.Owner = this;
-                _armor = value;
-            } 
-        }
-    
+        public Armor Armor;
         public int MaxHitPoints { get; protected set; }     //creature maximum hit points
         public int CurrentHitPoints { get; protected set; } //creature current hit points
         public string Name { get; set; }        //creature name
@@ -91,6 +66,22 @@ namespace Adventure_Game_407
             if (CurrentHitPoints < 0)
             {
                 CurrentHitPoints = 0;
+            }
+        }
+        
+        // Pickup item and make this the item owner
+        public void PickUp(Item item)
+        {
+            item.Owner = this;
+            item.RoomOccupied = Room;
+
+            if (item is Armor)
+            {
+                Armor = (Armor)item;
+            }
+            else if (item is Weapon)
+            {
+                Weapon = (Weapon) item;
             }
         }
     }
