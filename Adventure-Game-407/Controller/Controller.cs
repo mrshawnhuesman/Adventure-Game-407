@@ -177,20 +177,34 @@ namespace Adventure_Game_407
         //GetLoot(...) will show current loot drop and ask hero to pick item from loot
         private void GetLoot(Hero hero)        {
             List<Item> roomLoot = hero.Room.Loot;
-            for (int index = 0; index < roomLoot.Count; index++)
+            if (roomLoot.Count >= 1)
             {
                 var lootChoice = View.AskHeroToGetLoot(hero);
                 if (lootChoice < roomLoot.Count)
                 {
-                    var itemToBePickedUp = hero.Room.Loot[lootChoice];
-                    hero.PickUp(itemToBePickedUp);
-                    roomLoot.Remove(itemToBePickedUp);
+                    for (int index = 0; index < roomLoot.Count; index++)
+                    {
+                        if (lootChoice < roomLoot.Count)
+                        {
+                            var itemToBePickedUp = hero.Room.Loot[lootChoice];
+                            hero.PickUp(itemToBePickedUp);
+                            roomLoot.Remove(itemToBePickedUp);
+                            GetLoot(hero);
+                        }
+                    }
+                }
+                else if (lootChoice == roomLoot.Count)
+                {
+                    Console.WriteLine("Leaving Loot Behind..");
                 }
                 else
                 {
-                    Console.WriteLine("\nInvalid Selection: Please try again");
+                    Console.WriteLine("Invalid selection. Try Again");
+                    GetLoot(hero);
                 }
             }
+                
+            
         }
     }
 }

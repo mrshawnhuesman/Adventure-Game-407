@@ -193,7 +193,8 @@ namespace Adventure_Game_407.View
         {
             List<Item> heroLoot = hero.Room.Loot;
             ShowLoot(heroLoot);
-            var lootChoice = AskUserInputInteger("What loot do you want?:", 0, heroLoot.Count + 1); //this will only ask Hero to pick one item only ?
+            var lootMessage = "What loot do you want? Select Loot or :" + (heroLoot.Count) + " to quit.";
+            var lootChoice = AskUserInputInteger(lootMessage, 0, heroLoot.Count); //this will only ask Hero to pick one item only ?
             return lootChoice;
         }
 
