@@ -5,6 +5,8 @@ namespace Adventure_Game_407.View
 {
     public class CLIView
     {
+        // show the types of all rooms in the dungeon minimap array
+        // display the area the user is located by '+'
         public void ShowDungeonMinimap(Dungeon dungeon, Hero hero)
         {
             Console.WriteLine("");
@@ -29,7 +31,8 @@ namespace Adventure_Game_407.View
 
             Console.WriteLine("Your location is indicated by " + '+');
         }
-
+        
+        // ask and assign hero name
         public void AskForHeroName(Hero hero)
         {
             Console.WriteLine("Enter Hero Name: ");
@@ -37,6 +40,11 @@ namespace Adventure_Game_407.View
             hero.Name = name;
         }
 
+        //Main menu for game loop
+        //choices:
+        // 1- view inventory, 2 - view minimap, 3 - inspect room
+        // 4-7 move up, down, left, or right respectively provided it is possible
+        // 8 fight monster if it is available
         public int AskForMainMenuChoice(Dungeon dungeon, Hero hero)
         {
             Console.WriteLine("");
