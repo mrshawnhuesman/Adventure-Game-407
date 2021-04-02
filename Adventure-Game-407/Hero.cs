@@ -71,7 +71,7 @@ namespace Adventure_Game_407
                 //if the opponent dies, display win message to console
                 else
                 {   
-                    Console.WriteLine("HERO - " + Name + " terminated " + opponent.Name);
+                    Console.WriteLine("HERO - " + Name + " terminated " + opponent.Name); 
                     Weapon.NumAttackBuff = 0;   //reset number attack buff to 0 when battle is ended - target is terminated
                     Weapon.DamageBuff = 0;      //reset damage attack buff to 0 when battle is ended - target is terminated
                     
