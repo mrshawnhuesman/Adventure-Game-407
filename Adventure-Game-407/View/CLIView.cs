@@ -29,13 +29,13 @@ namespace Adventure_Game_407.View
             Console.WriteLine("Your location is indicated by " + '+');
         }
 
-        public void AskHeroForName(Hero hero) {
+        public void AskForHeroName(Hero hero) {
             Console.WriteLine("Enter Hero Name: ");
             var name = Console.ReadLine();
             hero.Name = name;
         }
         
-        public void ShowMainMenu(Dungeon dungeon, Hero hero)
+        public int AskForMainMenuChoice(Dungeon dungeon, Hero hero)
         {
             Console.WriteLine("");
             // display HP and items in inventory
@@ -57,72 +57,12 @@ namespace Adventure_Game_407.View
             Console.WriteLine();
 
             var menuChoice = AskUserInputInteger("Input choice: ", 1, 8);
-
-            switch (menuChoice)
-            {
-                // View Inventory
-                case 1:
-                    ShowHeroInventory(hero);
-                    ShowMainMenu(dungeon, hero);
-                    break;
-                // View Minimap
-                case 2:
-                    ShowDungeonMinimap(dungeon, hero);
-                    ShowMainMenu(dungeon, hero);
-                    break;
-                // Inspect Room
-                case 3:
-                    ShowRoomInformation(hero.Room);
-                    ShowMainMenu(dungeon, hero);
-                    break;
-                // Move Up
-                case 4:
-                    if (dungeon.CanMoveUp())
-                    {
-                        dungeon.MoveUp();
-                    }
-                    break;
-                // Move Down
-                case 5:
-                    if (dungeon.CanMoveDown())
-                    {
-                        dungeon.MoveDown();
-                    }
-                    break;
-                // Move Left
-                case 6:
-                    if (dungeon.CanMoveLeft())
-                    {
-                        dungeon.MoveLeft();
-                    }
-                    break;
-                // Move Right
-                case 7:
-                    if (dungeon.CanMoveRight())
-                    {
-                        dungeon.MoveRight();
-                    }
-                    break;
-                case 8:
-                    if (hero.Room.HasMonster())
-                    {
-                        // fight monster
-                        var monster = hero.Room.Monster;
-                        hero.Fight(monster);
-                        // remove monster from room if it has died
-                        if (monster.CurrentHitPoints >= 0)
-                        {
-                            dungeon.CurrentRoom.Monster = null;
-                        }
-                    }
-                    break;
-            }
-
+            return menuChoice;
         }
 
         //showHeroInventory(...) will show current items in hero inventory
         // and ask the hero if they would like to use or drop items in their inventory
-        private void ShowHeroInventory(Hero hero)
+        public int AskForInventoryChoice(Hero hero)
         {
             Console.WriteLine("");
             List<Item> inventory = hero.Inventory;
@@ -137,37 +77,10 @@ namespace Adventure_Game_407.View
                                    "[" + (inventory.Count + 1) + "] to exit inventory menu.";
             var inventoryChoice = AskUserInputInteger(inventoryMessage, 0, inventory.Count + 1);
 
-            if (inventoryChoice == inventory.Count + 1)
-            {
-                Console.WriteLine("Closing inventory menu.");
-            }
-            else
-            {
-                Console.WriteLine("You are looking at: ");
-                var itemSelected = inventory[inventoryChoice];
-                ShowItemInformation(itemSelected, inventoryChoice);
-                
-                Console.WriteLine("[1] - Use Item");
-                Console.WriteLine("[2] - Drop Item");
-                Console.WriteLine("[3] - Exit Menu");
-                var itemChoice = AskUserInputInteger("Selection:", 1, 3);
-                switch (itemChoice)
-                {
-                    case 1:
-                        itemSelected.Use();
-                        break;
-                    case 2:
-                        itemSelected.Drop();
-                        break;
-                    case 3:
-                        Console.WriteLine("Exiting menu");
-                        break;
-                }
-                ShowHeroInventory(hero);
-            }
+            return inventoryChoice;
         }
 
-        private void ShowItemInformation(Item item, int index)
+        public void ShowItemInformation(Item item, int index)
         {
             Console.WriteLine("");
             Console.WriteLine("Item {0}: {1, -15} Type: {2}", index, item.Name, item.GetType().Name);
@@ -181,7 +94,7 @@ namespace Adventure_Game_407.View
             }
         }
         
-        private void ShowRoomInformation(Room room)
+        public void ShowRoomInformation(Room room)
         {
             Console.WriteLine("");
             Console.WriteLine("Current Room Type: " + room.Type);
@@ -194,7 +107,7 @@ namespace Adventure_Game_407.View
             ShowMonsterInformation(room.Monster);
         }
 
-        private void ShowMonsterInformation(Creature monster)
+        public void ShowMonsterInformation(Creature monster)
         {
             Console.WriteLine("");
             if (monster != null)
@@ -241,7 +154,7 @@ namespace Adventure_Game_407.View
         }
         
         //showHero(...) will show hero name, hit points, inventory, inventory space
-        private void ShowHeroInformation(Hero hero)
+        public void ShowHeroInformation(Hero hero)
         {
             Console.WriteLine("");
             Console.WriteLine(hero.Name + "(HP: " + hero.CurrentHitPoints + ")");
@@ -249,7 +162,7 @@ namespace Adventure_Game_407.View
                               + (hero.Inventory.Capacity - hero.Inventory.Count) + " empty slot(s)");
         }
 
-        private int AskUserInputInteger(string stringInput, int min, int max)
+        public int AskUserInputInteger(string stringInput, int min, int max)
         {
             int number = 0;
             Console.WriteLine(stringInput);
