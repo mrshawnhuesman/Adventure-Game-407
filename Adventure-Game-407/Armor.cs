@@ -2,16 +2,20 @@
 
 namespace Adventure_Game_407
 {
+    // Armor class
     public class Armor : Item
     {
-        public int Strength { get; set;  }
+        public int Strength { get; set;  }  
 
+        // Default Armor constructor that generates a random Strength from 1 - 20
         public Armor()
         {
             Strength = StaticRandom.Instance.Next(20);
+            Strength += 1;
             GenerateName();
         }
 
+        // Armor constructor that sets the Strength and Name
         public Armor(int strength)
         {
             Strength = strength;
@@ -21,10 +25,10 @@ namespace Adventure_Game_407
         public Armor(int strength, string name)
         {
             Strength = strength;
-            GenerateName();
+            Name = name;
         }
 
-        public void GenerateName()
+        private void GenerateName()
         {
             if (Strength <= 20 || Strength >= 15)
                 Name = "Knight Armor";
@@ -35,12 +39,12 @@ namespace Adventure_Game_407
             else
                 Name = "Weak Armor";
         }
-        public int CompareTo(Armor armor)
+        private int CompareTo(Armor armor)
         {
-            var currentArmor = this.Strength;
+            var currentArmor = Strength;
             if (currentArmor > armor.Strength)
                 return 1;
-            else if (currentArmor == this.Strength)
+            if (currentArmor == Strength)
                 return 0;
             return -1;
         }

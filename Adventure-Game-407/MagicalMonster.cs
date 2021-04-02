@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace Adventure_Game_407
 {
+    // MagicalMonster class
     public class MagicalMonster : Creature
     {
         public readonly int Aggression;
@@ -10,7 +10,7 @@ namespace Adventure_Game_407
         public MagicalSkill DefensiveSkill { get; }
         public double DamageReductionBuff { get; set; }
 
-        //MagicalMonster constructor that takes parameter name, weapon, armor, hitpoints, agression level, and monster type        
+        //MagicalMonster constructor that takes parameter name, weapon, armor, hitpoints, aggression level, and monster type        
         public MagicalMonster(string name, Weapon weapon, Armor armor, int hitpoints, int aggression, MagicalSkill offensiveSkill, MagicalSkill defensiveSkill)
         {
             Name = name;
@@ -43,7 +43,7 @@ namespace Adventure_Game_407
                 else if (move.Item1 == 2)               //else set the damage reduction value to the damage reduction calculation returned by generateMove method  
                 {              
                     var damageReduction = move.Item2;
-                    ((MagicalMonster)this).DamageReductionBuff = damageReduction;
+                    DamageReductionBuff = damageReduction;
                     Console.WriteLine(Name + " cast defensive " + DefensiveSkill.Name + " for " + DefensiveSkill.DefensiveBuff + "% defense next round.");
                 }
                 else                                     //else if the name of the move is "magic attack" then set attack damage with the magic attack damage value returned by generateMove method               

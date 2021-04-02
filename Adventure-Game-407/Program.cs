@@ -1,6 +1,4 @@
-﻿using System;
-using System.Net.Mail;
-//using Adventure_Game_407.View;
+﻿//using Adventure_Game_407.View;
 
 namespace Adventure_Game_407
 {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace Adventure_Game_407
 {
+    // Room class 
     public class Room
     {
         /*
@@ -64,7 +65,8 @@ namespace Adventure_Game_407
             CheckForMonster();
         }
         
-        public bool isEmpty()
+        // Returns true is type is empty
+        public bool IsEmpty()
         {
             if (Type == ' ')
             {
@@ -137,6 +139,7 @@ namespace Adventure_Game_407
             CheckForMonster();
         }
 
+        // Rolls a 0 or 1, and if 1 calls CreateMonster(), otherwise does nothing 
         private void CheckForMonster()
         {
             var rollForMonster = StaticRandom.Instance.Next(2);
@@ -150,7 +153,7 @@ namespace Adventure_Game_407
         private void CreateMonster()
         {
             // check for monster name
-            var monsterNames = new string[]
+            var monsterNames = new []
             {
                 "Seth Adjei", "Shahid Noor", "Aziz Bahha", "Chris Brewer",
                 "Alina Campan", "Nicholas Caporusso", "Ankur Chattopadhyay",
@@ -205,6 +208,7 @@ namespace Adventure_Game_407
             }
         }
 
+        // Returns true if Room contains a Monster
         public bool HasMonster()
         {
             if (Monster != null)
@@ -215,6 +219,7 @@ namespace Adventure_Game_407
             return false;
         }
 
+        // Checks and returns the Monster Aggression
         public int CheckMonsterAggro()
         {
             if (HasMonster())

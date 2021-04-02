@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using Microsoft.Win32;
 
 #pragma warning disable IDE0038
 
 namespace Adventure_Game_407
 {
+    // Hero class
     public class Hero : Creature
     {
-        private readonly int InventoryCapacity = 10;
+        private const int InventoryCapacity = 10;
         public List<Item> Inventory { get; protected set; }
   
         //Hero constructor that takes parameter name, weapon, armor, and hitpoints

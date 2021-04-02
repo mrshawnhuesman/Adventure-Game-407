@@ -1,15 +1,15 @@
-﻿using System;
-
-namespace Adventure_Game_407
+﻿namespace Adventure_Game_407
 {
+    // Weapon Class
     public class Weapon : Item
     {
         public int NumAttacks { get; set; }
         public int MaxDamage { get; set; }
         public int DamageBuff { get; set; }
         public int NumAttackBuff { get; set; }
-        private readonly bool IsMagical;
+        private readonly bool _isMagical;
 
+        // Default constructor that will automatically generate damage, number of attacks, type, name
         public Weapon()
         {
             var rollSwingsPerTurn = StaticRandom.Instance.Next(2);
@@ -19,11 +19,11 @@ namespace Adventure_Game_407
             var rollIsMagical = StaticRandom.Instance.Next(2);
             if (rollIsMagical == 1)
             {
-                IsMagical = true;
+                _isMagical = true;
             }
             else
             {
-                IsMagical = false;
+                _isMagical = false;
             }
             GenerateName();
         }
@@ -33,59 +33,62 @@ namespace Adventure_Game_407
         {
             NumAttacks = numAttacks;
             MaxDamage = maxDamage;
-            IsMagical = isMagical;
+            _isMagical = isMagical;
             GenerateName();
+            if (_isMagical) 
+                Name = "Magic " + Name;
         }
 
-        //Weapon constructure that takes 4 parameters : number of attacks, max weapon damage, weapon type, and weapon name
+        //Natural Weapon constructor that takes 4 parameters : number of attacks, max weapon damage, weapon type, and weapon name
         public Weapon(int numAttacks, int maxDamage, bool isMagical, string name)
         {
             NumAttacks = numAttacks;
             MaxDamage = maxDamage;
-            IsMagical = isMagical;
+            _isMagical = isMagical;
             Name = name;
         }
 
-        public void GenerateName()
+        private void GenerateName()
         {
-            var miscellaneousWeaponNames = new string[]
+            var miscellaneousWeaponNames = new []
             {
                 "Handheld Fan",
                 "Dr. Fox's Pen",
                 "Computer",
                 "Computer Mouse",
                 "COBOL: The Programming Language",
+                "NullPointer ExcepZion"
             };
             
-            if (NumAttacks == 1 && MaxDamage < 3 && IsMagical == false)
-                Name = "Teddy Bear";
+            if (NumAttacks == 1 && MaxDamage < 3 && _isMagical == false)
+                Name = "Gummy Bear";
             
-            else if (NumAttacks == 1 && MaxDamage < 3 && IsMagical == false)
+            else if (NumAttacks == 1 && MaxDamage < 3 && _isMagical == false)
                 Name = "Bread Stick";
 
-            else if (NumAttacks == 2 && MaxDamage == 3 || MaxDamage == 4 && IsMagical == false)
+            else if (NumAttacks == 2 && MaxDamage == 3 || MaxDamage == 4 && _isMagical == false)
                 Name = "Hammer";
 
-            else if (NumAttacks == 1 && MaxDamage == 3 || MaxDamage == 4 && IsMagical == false)
-                Name = "Bow and Arrow";
+            else if (NumAttacks == 1 && MaxDamage == 3 || MaxDamage == 4 && _isMagical == false)
+                Name = "Water Gun";
 
-            else if (NumAttacks == 2 && MaxDamage == 3 || MaxDamage == 4 && IsMagical == false)
+            else if (NumAttacks == 2 && MaxDamage == 3 || MaxDamage == 4 && _isMagical == false)
                 Name = "Lawn Mower";
 
-            else if (NumAttacks == 1 && MaxDamage == 3 || MaxDamage == 4 && IsMagical)
-                Name = "Magic Iron Fist";
+            else if (NumAttacks == 1 && MaxDamage == 3 || MaxDamage == 4 && _isMagical)
+                Name = "Iron Fist";
 
-            else if (NumAttacks == 2 && MaxDamage == 3 || MaxDamage == 4 && IsMagical)
-                Name = "Magic Sword";
+            else if (NumAttacks == 2 && MaxDamage == 3 || MaxDamage == 4 && _isMagical)
+                Name = "Sword";
             
-            else if (NumAttacks == 1 && MaxDamage == 5 && IsMagical)
-                Name = "Magic Staff";
+            else if (NumAttacks == 1 && MaxDamage == 5 && _isMagical)
+                Name = "Staff";
             
-            else if (NumAttacks == 2 && MaxDamage == 5 && IsMagical == false)
+            else if (NumAttacks == 2 && MaxDamage == 5 && _isMagical == false)
                 Name = "COVID-19";
             
-            else if (NumAttacks == 2 && MaxDamage == 5 && IsMagical)
-                Name = "Magic School Bus";
+            else if (NumAttacks == 2 && MaxDamage == 5 && _isMagical)
+                Name = "Economic Recession";
 
             else
             {
@@ -96,14 +99,14 @@ namespace Adventure_Game_407
         
         public int CompareTo(Weapon weapon)
         {
-            var currentIsMagical = this.IsMagical;
-            var currentNumAttacks = this.NumAttacks;
-            var currentMaxDamage = this.MaxDamage;
+            var currentIsMagical = _isMagical;
+            var currentNumAttacks = NumAttacks;
+            var currentMaxDamage = MaxDamage;
             
             // IsMagical carries most weight
-            if (currentIsMagical && weapon.IsMagical == false)
+            if (currentIsMagical && weapon._isMagical == false)
                 return 1;
-            if (weapon.IsMagical && currentIsMagical == false)
+            if (weapon._isMagical && currentIsMagical == false)
                 return -1;
             // if isMagical is true for both, or false for both, compare MaxDamage and NumAttacks
             if (currentNumAttacks > weapon.NumAttacks && currentMaxDamage > weapon.MaxDamage)

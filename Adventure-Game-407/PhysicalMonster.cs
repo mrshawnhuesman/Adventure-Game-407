@@ -5,21 +5,21 @@ namespace Adventure_Game_407
 {
     public class PhysicalMonster : Creature
     {   
-        public readonly int Aggression;    //monster agression level (1 is low, 3 is high)
-        private readonly Weapon naturalWeapon = new Weapon (1, 2, false, "claw");   //default monster armor which is the natural armor
-        private readonly Armor naturalArmor = new Armor (1, "tough skin");          //default monster armor which is the natural armor
+        public readonly int Aggression;    //monster aggression level (1 is low, 3 is high)
+        private readonly Weapon _naturalWeapon = new Weapon (1, 2, false, "claw");   //default monster armor which is the natural armor
+        private readonly Armor _naturalArmor = new Armor (1, "tough skin");          //default monster armor which is the natural armor
 
-        //Monster constructor that takes parameter name, equippable weapon, equippable armor, hitpoints, agression level, and monster type
-        //Monster natural weapon values and natural armor values will be combined with equippable armor and equippable weapon
-        //the name of the weapon or armor is based on the equippable armor or weapon
+        //Monster constructor that takes parameter name, equipped weapon, equipped armor, hitpoints, aggression level, and monster type
+        //Monster natural weapon values and natural armor values will be combined with equipped armor and equipped weapon
+        //the name of the weapon or armor is based on the equipped armor or weapon
         public PhysicalMonster(string name, Weapon weapon, Armor armor, int hitpoints, int aggression)
         {
             Name = name;
             Weapon = weapon;
-            Weapon.NumAttacks += naturalWeapon.NumAttacks;     
-            Weapon.MaxDamage += naturalWeapon.MaxDamage;            
+            Weapon.NumAttacks += _naturalWeapon.NumAttacks;     
+            Weapon.MaxDamage += _naturalWeapon.MaxDamage;            
             Armor = armor;
-            Armor.Strength += naturalArmor.Strength;
+            Armor.Strength += _naturalArmor.Strength;
             MaxHitPoints = hitpoints;
             CurrentHitPoints = hitpoints;
             Aggression = aggression;
@@ -98,7 +98,7 @@ namespace Adventure_Game_407
             else                                  //else, this is the monster move that will restore its hp, compute the random hit points to be restored and return the type of move and the value of the hitpoints to be restored
             {
                 moveValue = StaticRandom.Instance.Next(1, 3);                         //generate random number 1 or 2  
-                moveValue = (int) (moveValue / 10 * this.CurrentHitPoints);
+                moveValue = moveValue / 10 * MaxHitPoints;
                 move = new Tuple<int, int>(2, moveValue);               
             }            
             return move;
