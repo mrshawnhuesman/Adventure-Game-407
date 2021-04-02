@@ -25,5 +25,13 @@ namespace Adventure_Game_407
             // drop item into room
             RoomOccupied = ((Hero) Owner).Room;
         }
+        
+        public void RemoveItemFromInventory() {
+            if (Owner is Hero)
+            {
+                var hero = ((Hero) Owner);
+                hero.Inventory.Remove(hero.Inventory.Find(x => x.Owner is Hero));
+            }
+        }
     }
 }
