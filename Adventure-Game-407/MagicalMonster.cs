@@ -66,12 +66,6 @@ namespace Adventure_Game_407
 
                 //if the opponent still alive then opponent will fight back
                 if (opponent.IsAlive()) opponent.Fight(this);
-
-                //if the hero dies, display hero has failed message
-                else
-                {
-                    Console.WriteLine("HERO - " + opponent.Name + " has failed....GAME OVER");           
-                }
             }
         }
 

@@ -193,7 +193,7 @@ namespace Adventure_Game_407.View
         {
             List<Item> heroLoot = hero.Room.Loot;
             ShowLoot(heroLoot);
-            var lootChoice = AskUserInputInteger("What loot do you want?:", 1, heroLoot.Count + 1); //this will only ask Hero to pick one item only ?
+            var lootChoice = AskUserInputInteger("What loot do you want?:", 0, heroLoot.Count + 1); //this will only ask Hero to pick one item only ?
             return lootChoice;
         }
 
@@ -203,7 +203,7 @@ namespace Adventure_Game_407.View
             Console.WriteLine("Current Room Loot: ");
             for (int i = 0; i < heroLoot.Count; i++)
             {
-                Console.Write(heroLoot[i].Name + " ");
+                Console.WriteLine("Item {0}: {1, -15} Type: {2}", i, heroLoot[i].Name, heroLoot[i].GetType().Name);
             }
         }
     }       

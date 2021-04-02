@@ -9,6 +9,7 @@
         public Treasure(int goldAmount)
         {
             GoldAmount = goldAmount;
+            Name = "Gold coins";
         }
     }
 }

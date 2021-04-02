@@ -12,7 +12,45 @@ namespace Adventure_Game_407
         public int MaxHitPoints { get; protected set; }     //creature maximum hit points
         public int CurrentHitPoints { get; protected set; } //creature current hit points
         public string Name { get; set; }        //creature name
-        public Room Room { get; set; }          //creature current room location              
+        // public Room Room { get; set; }          //creature current room location  
+        private Room _room;
+
+        // public Room Room
+        // {
+        //     get
+        //     {
+        //         if (this is Hero)
+        //         {
+        //             return ((Hero) this).Room;
+        //         }
+        //
+        //         return _room;
+        //     }
+        //     
+        //     set
+        //     {
+        //         _room = value;
+        //     }
+        // }  
+        //creature current room location
+
+        public Room Room
+        {
+            get
+            {
+                if (this is Hero hero)
+                {
+                    return hero.Room;
+                }
+
+                return _room;
+            }
+
+            set
+            {
+                _room = value;
+            }
+        }
       
         //Abstract Fight(...) method will compute the result of a fight between 2 creatures
         public abstract void Fight(Creature opponent);
@@ -87,5 +125,6 @@ namespace Adventure_Game_407
                 Weapon = (Weapon)item;
             }
         }
+        
     }
 }

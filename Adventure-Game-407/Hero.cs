@@ -12,7 +12,7 @@ namespace Adventure_Game_407
         
         private Room _room;
 
-        public new Room Room
+        public Room Room
         {
             get
             {
@@ -31,6 +31,8 @@ namespace Adventure_Game_407
         {
             Inventory = new List<Item>(InventoryCapacity) {};
             Name = name;
+            // Weapon = weapon;
+            // Armor = armor;
             Equip(weapon);
             Equip(armor);
             MaxHitPoints = hitpoints;

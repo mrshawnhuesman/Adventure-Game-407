@@ -22,7 +22,6 @@ namespace Adventure_Game_407
                 View.ShowDungeonMinimap(dungeon, hero);
                 PerformMainMenuChoice(hero, dungeon);
                 CheckRoomForMonsters(hero);
-                GetLoot(hero);
             }
         }
 
@@ -142,6 +141,10 @@ namespace Adventure_Game_407
             }
             else
             {
+                if (currentRoom.Loot.Count > 0)
+                {
+                    GetLoot(hero);
+                }
                 Console.WriteLine("No Monsters found.");
             }
         }
@@ -156,14 +159,19 @@ namespace Adventure_Game_407
         private bool HasGameEnded(Hero hero)
         {
             // hero has died or reached the exit
-            if (!hero.IsAlive() || hero.Room.Type == 'X')
+            if (!hero.IsAlive())
             {
+                Console.WriteLine("You died. Goodbye.");
                 return true;
             }
-            else
+
+            if (hero.Room.Type == 'X')
             {
-                return false;
+                Console.WriteLine("You have exited the game. Goodbye.");
+                return true;
             }
+
+            return false;
         }
 
         //GetLoot(...) will show current loot drop and ask hero to pick item from loot
@@ -172,12 +180,16 @@ namespace Adventure_Game_407
             for (int index = 0; index < roomLoot.Count; index++)
             {
                 var lootChoice = View.AskHeroToGetLoot(hero);
-                if (lootChoice <= roomLoot.Count)
+                if (lootChoice < roomLoot.Count)
                 {
                     var itemToBePickedUp = hero.Room.Loot[lootChoice];
                     hero.PickUp(itemToBePickedUp);
                     roomLoot.Remove(itemToBePickedUp);
-                }             
+                }
+                else
+                {
+                    Console.WriteLine("\nInvalid Selection: Please try again");
+                }
             }
         }
     }
