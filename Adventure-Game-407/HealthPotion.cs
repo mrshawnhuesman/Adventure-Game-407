@@ -15,6 +15,7 @@
         public override void Use()
         {
             Owner.RestoreHealth(RestoreAmount);
+            RemoveItemFromInventory();
         }
     }
 }

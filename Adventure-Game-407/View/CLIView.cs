@@ -13,7 +13,8 @@ namespace Adventure_Game_407.View
             var currentRoom = hero.Room;
             for (int i = 0; i < dungeon.Rows; i++)
             {
-                for (int j = 0; j < dungeon.Cols; j++) {
+                for (int j = 0; j < dungeon.Cols; j++)
+                {
                     if (i == currentRoom.Row && j == currentRoom.Col)
                     {
                         Console.Write("+");
@@ -25,29 +26,30 @@ namespace Adventure_Game_407.View
                 }
                 Console.WriteLine();
             }
-            
+
             Console.WriteLine("Your location is indicated by " + '+');
         }
 
-        public void AskForHeroName(Hero hero) {
+        public void AskForHeroName(Hero hero)
+        {
             Console.WriteLine("Enter Hero Name: ");
             var name = Console.ReadLine();
             hero.Name = name;
         }
-        
+
         public int AskForMainMenuChoice(Dungeon dungeon, Hero hero)
         {
             Console.WriteLine("");
             // display HP and items in inventory
             ShowHeroInformation(hero);
-            
+
             Console.WriteLine("[1] - View Inventory");
             Console.WriteLine("[2] - View Minimap");
             Console.WriteLine("[3] - Inspect Room");
             Console.Write("| ");
-            Console.Write(dungeon.CanMoveUp()    ? "[4] - Move Up     | " : "[4] - Unavailable | ");
-            Console.Write(dungeon.CanMoveDown()  ? "[5] - Move Down   | " : "[5] - Unavailable | ");
-            Console.Write(dungeon.CanMoveLeft()  ? "[6] - Move Left   | " : "[6] - Unavailable | ");
+            Console.Write(dungeon.CanMoveUp() ? "[4] - Move Up     | " : "[4] - Unavailable | ");
+            Console.Write(dungeon.CanMoveDown() ? "[5] - Move Down   | " : "[5] - Unavailable | ");
+            Console.Write(dungeon.CanMoveLeft() ? "[6] - Move Left   | " : "[6] - Unavailable | ");
             Console.Write(dungeon.CanMoveRight() ? "[7] - Move Right  | " : "[7] - Unavailable | ");
             Console.WriteLine();
             if (hero.Room.HasMonster())
@@ -90,10 +92,10 @@ namespace Adventure_Game_407.View
             }
             else if (item is Armor)
             {
-                ShowArmorInformation((Armor) item);
+                ShowArmorInformation((Armor)item);
             }
         }
-        
+
         public void ShowRoomInformation(Room room)
         {
             Console.WriteLine("");
@@ -103,7 +105,7 @@ namespace Adventure_Game_407.View
             {
                 Console.Write(room.Loot[i].Name + " ");
             }
-            
+
             ShowMonsterInformation(room.Monster);
         }
 
@@ -121,10 +123,10 @@ namespace Adventure_Game_407.View
                 else
                 {
                     Console.WriteLine("Type: Magical");
-                    var offenseSkill = ((MagicalMonster) monster).DefensiveSkill;
+                    var offenseSkill = ((MagicalMonster)monster).DefensiveSkill;
                     Console.WriteLine("Offensive Ability: " + offenseSkill.Name);
                     Console.WriteLine("Offensive Damage: " + offenseSkill.OffensiveDamage);
-                    var defenseSkill = ((MagicalMonster) monster).OffensiveSkill;
+                    var defenseSkill = ((MagicalMonster)monster).OffensiveSkill;
                     Console.WriteLine("Defensive Ability: " + defenseSkill.Name);
                     Console.WriteLine("Defensive Damage: " + defenseSkill.DefensiveBuff);
                 }
@@ -152,16 +154,19 @@ namespace Adventure_Game_407.View
             Console.WriteLine("Armor Name: " + armor.Name);
             Console.WriteLine("Armor Defense Amount: " + armor.Strength);
         }
-        
-        //showHero(...) will show hero name, hit points, inventory, inventory space
+
+        //ShowHeroInformation(...) will show hero name, hit points, inventory, inventory space
         public void ShowHeroInformation(Hero hero)
         {
             Console.WriteLine("");
             Console.WriteLine(hero.Name + "(HP: " + hero.CurrentHitPoints + ")");
-            Console.WriteLine("Inventory Status: " + hero.Inventory.Count + " items in current inventory, " 
+            Console.WriteLine("Inventory Status: " + hero.Inventory.Count + " items in current inventory, "
                               + (hero.Inventory.Capacity - hero.Inventory.Count) + " empty slot(s)");
         }
 
+        //AskUserInputInteger(...) will ask user for an integer input 
+        //display string that ask user to input an integer from 1 to the max-1 
+        //if user selected the integer great than max, it will ask user to re-enter correct integer
         public int AskUserInputInteger(string stringInput, int min, int max)
         {
             int number = 0;
@@ -182,5 +187,24 @@ namespace Adventure_Game_407.View
             }
             return number;
         }
-    }
+
+        //AskHeroToGetLoot(...) will first show the available loot for the hero to pick up then ask hero to select the loot
+        public int AskHeroToGetLoot(Hero hero)
+        {
+            List<Item> heroLoot = hero.Room.Loot;
+            ShowLoot(heroLoot);
+            var lootChoice = AskUserInputInteger("What loot do you want?:", 1, heroLoot.Count + 1); //this will only ask Hero to pick one item only ?
+            return lootChoice;
+        }
+
+        //Method to show current items in the loot
+        public void ShowLoot(List<Item> heroLoot)
+        {
+            Console.WriteLine("Current Room Loot: ");
+            for (int i = 0; i < heroLoot.Count; i++)
+            {
+                Console.Write(heroLoot[i].Name + " ");
+            }
+        }
+    }       
 }

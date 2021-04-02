@@ -5,8 +5,10 @@ namespace Adventure_Game_407
     //creature class - super class of subclasses hero, monster, and magical monster
     public abstract class Creature
     {
-        public Weapon Weapon { get; set; }        //creature weapon
-        public Armor Armor { get; set; }          //creature armor
+        //creature weapon
+        public Weapon Weapon { get; set; }
+        //creature armor
+        public Armor Armor { get; set; }
         public int MaxHitPoints { get; protected set; }     //creature maximum hit points
         public int CurrentHitPoints { get; protected set; } //creature current hit points
         public string Name { get; set; }        //creature name
@@ -37,6 +39,9 @@ namespace Adventure_Game_407
         public int UseWeapon(Creature opponent)
         {          
             int accumulatedWeaponDamage = 0;
+            Weapon w = Weapon;
+            int temp = Weapon.NumAttacks;
+            int temp1 = Weapon.NumAttackBuff;
             int totalWeaponNumAttacks = Weapon.NumAttacks + Weapon.NumAttackBuff;
             for (int i = 0; i < totalWeaponNumAttacks; i++)                 //loop from 0 till the the max number of weapon attacks - 1
             {
@@ -64,6 +69,22 @@ namespace Adventure_Game_407
             if (CurrentHitPoints < 0)
             {
                 CurrentHitPoints = 0;
+            }
+        }
+        
+        // Equip item
+        public void Equip(Item item)
+        {
+            item.Owner = this;
+            item.RoomOccupied = Room;
+
+            if (item is Armor)
+            {
+                Armor = (Armor)item;
+            }
+            else if (item is Weapon)
+            {
+                Weapon = (Weapon)item;
             }
         }
     }

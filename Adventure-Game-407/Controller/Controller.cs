@@ -1,6 +1,7 @@
 ﻿﻿﻿using System;
-  using System.Runtime.Remoting.Contexts;
-  using Adventure_Game_407.View;
+using System.Runtime.Remoting.Contexts;
+using Adventure_Game_407.View;
+using System.Collections.Generic; 
 
 namespace Adventure_Game_407
 {
@@ -21,6 +22,7 @@ namespace Adventure_Game_407
                 View.ShowDungeonMinimap(dungeon, hero);
                 PerformMainMenuChoice(hero, dungeon);
                 CheckRoomForMonsters(hero);
+                GetLoot(hero);
             }
         }
 
@@ -79,7 +81,7 @@ namespace Adventure_Game_407
                         var monster = hero.Room.Monster;
                         hero.Fight(monster);
                         // remove monster from room if it has died
-                        if (monster.CurrentHitPoints >= 0)
+                        if (!monster.IsAlive())
                         {
                             dungeon.CurrentRoom.Monster = null;
                         }
@@ -161,6 +163,21 @@ namespace Adventure_Game_407
             else
             {
                 return false;
+            }
+        }
+
+        //GetLoot(...) will show current loot drop and ask hero to pick item from loot
+        private void GetLoot(Hero hero)        {
+            List<Item> roomLoot = hero.Room.Loot;
+            for (int index = 0; index < roomLoot.Count; index++)
+            {
+                var lootChoice = View.AskHeroToGetLoot(hero);
+                if (lootChoice <= roomLoot.Count)
+                {
+                    var itemToBePickedUp = hero.Room.Loot[lootChoice];
+                    hero.PickUp(itemToBePickedUp);
+                    roomLoot.Remove(itemToBePickedUp);
+                }             
             }
         }
     }
