@@ -126,5 +126,12 @@ namespace Adventure_Game_407
             }
         }
         
+        // DropAllItems causes creature to drop their weapon and armor
+        // Used when creature dies
+        public void DropAllItems()
+        {
+            Weapon.Drop();
+            Armor.Drop();
+        }
     }
 }

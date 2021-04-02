@@ -133,6 +133,7 @@ namespace Adventure_Game_407
                 if (currentRoom.CheckMonsterAggro() == 3)
                 {
                     currentRoom.Monster.Fight(hero);
+                    currentRoom.Monster.DropAllItems();
                 }
                 else
                 {
