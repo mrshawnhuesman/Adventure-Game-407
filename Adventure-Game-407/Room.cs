@@ -187,14 +187,14 @@ namespace Adventure_Game_407
                 // check for magical offense and defense abilities
                 var magicalOffenseAbilities = new []
                 {
-                    new MagicalSkill( "Fast Lecture", "offensive", 5),
-                    new MagicalSkill( "Long Homework", "offensive", 10),
-                    new MagicalSkill( "Bad Grade", "offensive", 15)
+                    new MagicalSkill( "Musical Strike", "offensive", 5),
+                    new MagicalSkill( "Snow Balls", "offensive", 10),
+                    new MagicalSkill( "Winter Storm", "offensive", 15)
                 };
                 var magicalDefenseAbilities = new []
                 {
-                    new MagicalSkill( "Class is Virtual Today", "defensive", 10),
-                    new MagicalSkill( "No Office Hours Today", "defensive", 20),
+                    new MagicalSkill( "Elemental Protection", "defensive", 10),
+                    new MagicalSkill( "Greater Elemental Protection", "defensive", 20),
                 };
                 
                 var rollOffenseIndex = StaticRandom.Instance.Next(magicalOffenseAbilities.Length);
