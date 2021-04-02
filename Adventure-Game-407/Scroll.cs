@@ -3,10 +3,10 @@
     // Scroll class
     public class Scroll : Item
     {
-        // turns Room type into 'M' disabling all magic abilities
-        public void Use(Hero hero)
+        // turns the Room the scroll is in to type 'M' disabling all magic abilities
+        public override void Use()
         {
-            hero.Room.Type = 'M';
+            RoomOccupied.Type = 'M';
         }
     }
 }
