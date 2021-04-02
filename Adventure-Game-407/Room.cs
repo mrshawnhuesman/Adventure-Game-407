@@ -180,6 +180,7 @@ namespace Adventure_Game_407
             {
                 Monster = new PhysicalMonster(monsterName, new Weapon(), new Armor(), 
                     monsterHitpoints, monsterAggression );
+                Monster.Room = this;
             }
             // magical monster
             else
@@ -205,6 +206,7 @@ namespace Adventure_Game_407
                 Monster = new MagicalMonster(monsterName, new Weapon(), new Armor(),
                     monsterHitpoints, monsterAggression, monsterOffenseAbility, 
                     monsterDefenseAbility  );
+                Monster.Room = this;
             }
         }
 
