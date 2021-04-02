@@ -1,4 +1,5 @@
 ﻿﻿﻿using System;
+  using System.Runtime.Remoting.Contexts;
   using Adventure_Game_407.View;
 
 namespace Adventure_Game_407
@@ -12,14 +13,112 @@ namespace Adventure_Game_407
             Hero hero = new Hero(null, new Weapon(), new Armor(), 150);
             Dungeon dungeon = new Dungeon(); 
             View = new CLIView();
-            View.AskHeroForName(hero);
+            View.AskForHeroName(hero);
             PutHeroInDungeon(hero, dungeon);
-            while (!hasGameEnded(hero))
+            while (!HasGameEnded(hero))
             {
                 hero.Room = dungeon.CurrentRoom;
                 View.ShowDungeonMinimap(dungeon, hero);
-                View.ShowMainMenu(dungeon, hero);
+                PerformMainMenuChoice(hero, dungeon);
                 CheckRoomForMonsters(hero);
+            }
+        }
+
+        private void PerformMainMenuChoice(Hero hero, Dungeon dungeon)
+        {
+            var menuChoice = View.AskForMainMenuChoice(dungeon, hero);
+            switch (menuChoice)
+            {
+                // View Inventory
+                case 1:
+                    PerformInventoryChoice(hero);
+                    PerformMainMenuChoice(hero, dungeon);
+                    break;
+                // View Minimap
+                case 2:
+                    View.ShowDungeonMinimap(dungeon, hero);
+                    PerformMainMenuChoice(hero, dungeon);
+                    break;
+                // Inspect Room
+                case 3:
+                    View.ShowRoomInformation(hero.Room);
+                    PerformMainMenuChoice(hero, dungeon);
+                    break;
+                // Move Up
+                case 4:
+                    if (dungeon.CanMoveUp())
+                    {
+                        dungeon.MoveUp();
+                    }
+                    break;
+                // Move Down
+                case 5:
+                    if (dungeon.CanMoveDown())
+                    {
+                        dungeon.MoveDown();
+                    }
+                    break;
+                // Move Left
+                case 6:
+                    if (dungeon.CanMoveLeft())
+                    {
+                        dungeon.MoveLeft();
+                    }
+                    break;
+                // Move Right
+                case 7:
+                    if (dungeon.CanMoveRight())
+                    {
+                        dungeon.MoveRight();
+                    }
+                    break;
+                case 8:
+                    if (hero.Room.HasMonster())
+                    {
+                        // fight monster
+                        var monster = hero.Room.Monster;
+                        hero.Fight(monster);
+                        // remove monster from room if it has died
+                        if (monster.CurrentHitPoints >= 0)
+                        {
+                            dungeon.CurrentRoom.Monster = null;
+                        }
+                    }
+                    break;
+            }
+        }
+
+        private void PerformInventoryChoice(Hero hero)
+        {
+            var inventoryChoice = View.AskForInventoryChoice(hero);
+            var inventory = hero.Inventory;
+            if (inventoryChoice == inventory.Count + 1)
+            {
+                Console.WriteLine("Closing inventory menu.");
+            }
+            else
+            {
+                Console.WriteLine("You are looking at: ");
+                var itemSelected = inventory[inventoryChoice];
+                View.ShowItemInformation(itemSelected, inventoryChoice);
+                
+                Console.WriteLine("[1] - Use Item");
+                Console.WriteLine("[2] - Drop Item");
+                Console.WriteLine("[3] - Exit Menu");
+                var itemChoice = View.AskUserInputInteger("Selection:", 1, 3);
+                switch (itemChoice)
+                {
+                    case 1:
+                        itemSelected.Use();
+                        break;
+                    case 2:
+                        itemSelected.Drop();
+                        break;
+                    case 3:
+                        Console.WriteLine("Exiting menu");
+                        break;
+                }
+                View.AskForInventoryChoice(hero);
             }
         }
 
@@ -52,7 +151,7 @@ namespace Adventure_Game_407
             View.ShowDungeonMinimap(dungeon, hero);
         }
 
-        private bool hasGameEnded(Hero hero)
+        private bool HasGameEnded(Hero hero)
         {
             // hero has died or reached the exit
             if (!hero.IsAlive() || hero.Room.Type == 'X')
