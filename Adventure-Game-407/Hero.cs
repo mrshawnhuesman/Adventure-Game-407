@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 
-#pragma warning disable IDE0038
-
 namespace Adventure_Game_407
 {
     // Hero class
@@ -11,6 +9,22 @@ namespace Adventure_Game_407
         private const int InventoryCapacity = 10;
         public List<Item> Inventory { get; protected set; }
         public Treasure Gold = new Treasure(0);
+        
+        private Room _room;
+
+        public new Room Room
+        {
+            get
+            {
+                return _room;
+            }
+            // ensures that when hero changes room that their items go with them
+            set
+            {
+                BringItemsToRoom();
+                _room = value;
+            }
+        }
   
         //Hero constructor that takes parameter name, weapon, armor, and hitpoints
         public Hero(string name, Weapon weapon, Armor armor, int hitpoints)
@@ -22,6 +36,7 @@ namespace Adventure_Game_407
             CurrentHitPoints = hitpoints;
             Inventory = new List<Item>(InventoryCapacity) { weapon, armor };
             Room = null;
+            BringItemsToRoom();
         }
 
         //Hero Move during Fight is weapon attack
@@ -92,6 +107,8 @@ namespace Adventure_Game_407
             {
                 Console.WriteLine("You do not have the capacity to pickup: " + item.Name);
             }
+
+            item.RoomOccupied = Room;
         }
 
         //DropItem method that will remove item from hero item inventory and add it to the current room loot 
@@ -109,5 +126,14 @@ namespace Adventure_Game_407
                 Console.WriteLine("Unable to drop item from inventory index: " + inventoryNumber);
             }
         }  
+        
+        // Bring all inventory items to current room occupied
+        private void BringItemsToRoom()
+        {
+            foreach (Item item in Inventory)
+            {
+                item.RoomOccupied = Room;
+            }
+        }
     }
 }
