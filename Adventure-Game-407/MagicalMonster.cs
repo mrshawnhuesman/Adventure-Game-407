@@ -83,12 +83,12 @@ namespace Adventure_Game_407
             int moveValue;                          
             Tuple<int, int> move;                                                        //placeholder that will hold the type of move (1 = magical attack, 2 defensive buff) and the value of the move (attack damage or buff value)                  
 
-            if (generateRandomMove == 1)          //if random number is 1, generate move named "magic attack" and compute attack damage
+            if (generateRandomMove == 1 && Room.Type != 'M')          //if random number is 1, generate move named "magic attack" and compute attack damage
             {
                 moveValue = OffensiveSkill.OffensiveDamage;
                 move = new Tuple<int, int>(1, moveValue);
             }
-            else if (generateRandomMove == 2)     //if random number is 2, generate move named "damage reduction" and compute damageReduction  
+            else if (generateRandomMove == 2 && Room.Type != 'M')     //if random number is 2, generate move named "damage reduction" and compute damageReduction  
             {
                 moveValue = DefensiveSkill.DefensiveBuff;
                 move = new Tuple<int, int>(2, moveValue);

@@ -5,9 +5,11 @@
     {
         public int NumAttacks { get; set; }
         public int MaxDamage { get; set; }
-        public int DamageBuff { get; set; }
+
+        public int DamageBuff => Owner.Room.Type == 'M' ? 0 : 2;
+
         public int NumAttackBuff { get; set; }
-        private readonly bool _isMagical;
+        public bool IsMagical { get; set; }
 
         // Default constructor that will automatically generate damage, number of attacks, type, name
         public Weapon()
@@ -19,11 +21,11 @@
             var rollIsMagical = StaticRandom.Instance.Next(2);
             if (rollIsMagical == 1)
             {
-                _isMagical = true;
+                IsMagical = true;
             }
             else
             {
-                _isMagical = false;
+                IsMagical = false;
             }
             GenerateName();
         }
@@ -33,9 +35,9 @@
         {
             NumAttacks = numAttacks;
             MaxDamage = maxDamage;
-            _isMagical = isMagical;
+            IsMagical = isMagical;
             GenerateName();
-            if (_isMagical) 
+            if (IsMagical) 
                 Name = "Magic " + Name;
         }
 
@@ -44,8 +46,9 @@
         {
             NumAttacks = numAttacks;
             MaxDamage = maxDamage;
-            _isMagical = isMagical;
+            IsMagical = isMagical;
             Name = name;
+            
         }
 
         private void GenerateName()
@@ -60,34 +63,34 @@
                 "NullPointer ExcepZion"
             };
             
-            if (NumAttacks == 1 && MaxDamage < 3 && _isMagical == false)
+            if (NumAttacks == 1 && MaxDamage < 3 && IsMagical == false)
                 Name = "Gummy Bear";
             
-            else if (NumAttacks == 1 && MaxDamage < 3 && _isMagical == false)
+            else if (NumAttacks == 1 && MaxDamage < 3 && IsMagical == false)
                 Name = "Bread Stick";
 
-            else if (NumAttacks == 2 && MaxDamage == 3 || MaxDamage == 4 && _isMagical == false)
+            else if (NumAttacks == 2 && MaxDamage == 3 || MaxDamage == 4 && IsMagical == false)
                 Name = "Hammer";
 
-            else if (NumAttacks == 1 && MaxDamage == 3 || MaxDamage == 4 && _isMagical == false)
+            else if (NumAttacks == 1 && MaxDamage == 3 || MaxDamage == 4 && IsMagical == false)
                 Name = "Water Gun";
 
-            else if (NumAttacks == 2 && MaxDamage == 3 || MaxDamage == 4 && _isMagical == false)
+            else if (NumAttacks == 2 && MaxDamage == 3 || MaxDamage == 4 && IsMagical == false)
                 Name = "Lawn Mower";
 
-            else if (NumAttacks == 1 && MaxDamage == 3 || MaxDamage == 4 && _isMagical)
+            else if (NumAttacks == 1 && MaxDamage == 3 || MaxDamage == 4 && IsMagical)
                 Name = "Iron Fist";
 
-            else if (NumAttacks == 2 && MaxDamage == 3 || MaxDamage == 4 && _isMagical)
+            else if (NumAttacks == 2 && MaxDamage == 3 || MaxDamage == 4 && IsMagical)
                 Name = "Sword";
             
-            else if (NumAttacks == 1 && MaxDamage == 5 && _isMagical)
+            else if (NumAttacks == 1 && MaxDamage == 5 && IsMagical)
                 Name = "Staff";
             
-            else if (NumAttacks == 2 && MaxDamage == 5 && _isMagical == false)
+            else if (NumAttacks == 2 && MaxDamage == 5 && IsMagical == false)
                 Name = "COVID-19";
             
-            else if (NumAttacks == 2 && MaxDamage == 5 && _isMagical)
+            else if (NumAttacks == 2 && MaxDamage == 5 && IsMagical)
                 Name = "Economic Recession";
 
             else
@@ -99,14 +102,14 @@
         
         public int CompareTo(Weapon weapon)
         {
-            var currentIsMagical = _isMagical;
+            var currentIsMagical = IsMagical;
             var currentNumAttacks = NumAttacks;
             var currentMaxDamage = MaxDamage;
             
             // IsMagical carries most weight
-            if (currentIsMagical && weapon._isMagical == false)
+            if (currentIsMagical && weapon.IsMagical == false)
                 return 1;
-            if (weapon._isMagical && currentIsMagical == false)
+            if (weapon.IsMagical && currentIsMagical == false)
                 return -1;
             // if isMagical is true for both, or false for both, compare MaxDamage and NumAttacks
             if (currentNumAttacks > weapon.NumAttacks && currentMaxDamage > weapon.MaxDamage)
