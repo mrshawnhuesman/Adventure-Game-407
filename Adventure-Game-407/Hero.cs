@@ -31,8 +31,8 @@ namespace Adventure_Game_407
         {
             Inventory = new List<Item>(InventoryCapacity) {};
             Name = name;
-            PickUp(weapon);
-            PickUp(armor);
+            Equip(weapon);
+            Equip(armor);
             MaxHitPoints = hitpoints;
             CurrentHitPoints = hitpoints;
             Room = null;

@@ -14,8 +14,8 @@ namespace Adventure_Game_407
         public MagicalMonster(string name, Weapon weapon, Armor armor, int hitpoints, int aggression, MagicalSkill offensiveSkill, MagicalSkill defensiveSkill)
         {
             Name = name;
-            PickUp(weapon);
-            PickUp(armor);
+            Equip(weapon);
+            Equip(armor);
             MaxHitPoints = hitpoints;
             CurrentHitPoints = hitpoints;
             Aggression = aggression;
@@ -81,8 +81,7 @@ namespace Adventure_Game_407
         {
             var generateRandomMove = StaticRandom.Instance.Next(1, 4);                   //generate random number 1 - 3
             int moveValue;                          
-            Tuple<int, int> move;                                                        //placeholder that will hold the type of move (1 = magical attack, 2 defensive buff) and the value of the move (attack damage or buff value)                  
-
+            Tuple<int, int> move;   
             if (generateRandomMove == 1 && Room.Type != 'M')          //if random number is 1, generate move named "magic attack" and compute attack damage
             {
                 moveValue = OffensiveSkill.OffensiveDamage;

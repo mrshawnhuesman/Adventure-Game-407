@@ -7,6 +7,7 @@
         public int MaxDamage { get; set; }
 
         public int DamageBuff => Owner.Room.Type == 'M' ? 0 : 2;
+        //public int DamageBuff { get; set; }
 
         public int NumAttackBuff { get; set; }
         public bool IsMagical { get; set; }

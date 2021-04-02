@@ -6,9 +6,9 @@ namespace Adventure_Game_407
     public abstract class Creature
     {
         //creature weapon
-        public Weapon Weapon;
+        public Weapon Weapon { get; set; }
         //creature armor
-        public Armor Armor;
+        public Armor Armor { get; set; }
         public int MaxHitPoints { get; protected set; }     //creature maximum hit points
         public int CurrentHitPoints { get; protected set; } //creature current hit points
         public string Name { get; set; }        //creature name
@@ -39,6 +39,9 @@ namespace Adventure_Game_407
         public int UseWeapon(Creature opponent)
         {          
             int accumulatedWeaponDamage = 0;
+            Weapon w = Weapon;
+            int temp = Weapon.NumAttacks;
+            int temp1 = Weapon.NumAttackBuff;
             int totalWeaponNumAttacks = Weapon.NumAttacks + Weapon.NumAttackBuff;
             for (int i = 0; i < totalWeaponNumAttacks; i++)                 //loop from 0 till the the max number of weapon attacks - 1
             {
@@ -69,8 +72,8 @@ namespace Adventure_Game_407
             }
         }
         
-        // Pickup item and make this the item owner
-        public void PickUp(Item item)
+        // Equip item
+        public void Equip(Item item)
         {
             item.Owner = this;
             item.RoomOccupied = Room;

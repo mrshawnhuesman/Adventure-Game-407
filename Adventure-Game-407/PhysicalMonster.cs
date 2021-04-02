@@ -15,10 +15,10 @@ namespace Adventure_Game_407
         public PhysicalMonster(string name, Weapon weapon, Armor armor, int hitpoints, int aggression)
         {
             Name = name;
-            PickUp(weapon);
+            Equip(weapon);
             Weapon.NumAttacks += _naturalWeapon.NumAttacks;     
             Weapon.MaxDamage += _naturalWeapon.MaxDamage;
-            PickUp(armor);
+            Equip(armor);
             Armor.Strength += _naturalArmor.Strength;
             MaxHitPoints = hitpoints;
             CurrentHitPoints = hitpoints;
